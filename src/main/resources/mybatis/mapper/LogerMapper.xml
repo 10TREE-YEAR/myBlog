@@ -1,0 +1,67 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wjl.blog.mapper.LogerMapper">
+
+    <!-- 查询用户信息 -->
+    <select id="queryExistUserNum" resultType="string">
+       SELECT t.`T_USER_NUM` FROM `jdbc`.`T_USER` t WHERE t.`T_USER_NUM` = #{userNum}
+    </select>
+
+    <!-- 存入用户信息 -->
+    <insert id="intsertUser">
+        INSERT INTO `jdbc`.`T_USER` (
+              `T_USER_ID`,
+              `T_USER_NUM`,
+              `T_USER_PASSWORD`,
+              `T_USER_NAME`,
+              `T_USER_STATE`,
+              `T_USER_STATR_TIME`,
+              `T_USER_IPHONE`
+            )
+            VALUES
+              (
+                #{userInfo.userID},
+                #{userInfo.userNum},
+                #{userInfo.userPassword},
+                #{userInfo.userName},
+                #{userInfo.userStart},
+                #{userInfo.userStartTime},
+                #{userInfo.iphone}
+              )
+    </insert>
+
+    <!-- 查询是否存在该用户 -->
+    <select id="queryUserInfo" resultType="int">
+        SELECT
+          COUNT(1)
+        FROM
+          `jdbc`.`T_USER` T1
+        WHERE T1.`T_USER_NUM` = #{loginUsername}
+        AND T1.`T_USER_PASSWORD` = #{password}
+    </select>
+
+    <!-- 查询状态使用的一级菜单 -->
+    <select id="queryBlogMenuBeans" resultType="com.wjl.blog.entity.BlogMenuBean">
+        SELECT
+            T1.`T_ID` AS id,
+            T1.`T_NAME` AS name,
+            T1.`T_URL` AS url,
+            T1.`T_FIRST_JB` AS firstJB,
+            T1.`T_TWO_JB` AS twoJB,
+            T1.`T_TREE_JD` AS treeJB,
+            T1.`T_START` AS start,
+            T1.`T_SORT` AS sort,
+            T1.`T_DESC` AS menuDesc,
+            T1.`T_TIME` AS menuTime
+            FROM
+            `jdbc`.`T_MENU` T1
+            WHERE T1.`T_START`='1'
+            AND T1.`T_FIRST_JB` &lt; 100
+            AND T1.`T_TWO_JB` = '00'
+            AND T1.`T_TREE_JD` = '00'
+            ORDER BY T1.`T_FIRST_JB` ASC
+    </select>
+
+</mapper>
