@@ -2,6 +2,9 @@ package com.wjl.blog.entity;
 
 import java.io.Serializable;
 
+/**
+ * 博客后台菜单bean
+ */
 public class BlogMenuBean implements Serializable {
 
     private String id; // 菜单id
