@@ -1,33 +1,18 @@
 package com.wjl.blog.entity;
 
+import lombok.Data;
+
 /**
  * 博客内容存入bean
  */
+@Data
 public class BlogContentBean {
     private String id;// id
     private String content; // 内容
+    private String state; // 状态
+    private String startTime;// 开始时间
+    private String endTime;// 结束时间
+    private String sort;// 排序
+    private String number;// 阅读数量
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    @Override
-    public String toString() {
-        return "BlogContentBean{" +
-                "id='" + id + '\'' +
-                ", content='" + content + '\'' +
-                '}';
-    }
 }

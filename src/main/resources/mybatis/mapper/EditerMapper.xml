@@ -5,7 +5,19 @@
 <mapper namespace="com.wjl.blog.mapper.EditerMapper">
 
   <insert id="insertBlogContert">
-
+    INSERT INTO `T_BOLG_CONTENT` (
+        `t_id`,
+        `t_blog_content`,
+        `t_state`,
+        `t_start_time`
+      )
+      VALUES
+        (
+          #{blogContentBean.id},
+          #{blogContentBean.content},
+          #{blogContentBean.state},
+          #{blogContentBean.startTime}
+        )
   </insert>
 
 </mapper>
