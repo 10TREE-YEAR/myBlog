@@ -7,6 +7,7 @@
   <insert id="insertBlogContert">
     INSERT INTO `T_BOLG_CONTENT` (
         `t_id`,
+        `t_title`,
         `t_blog_content`,
         `t_state`,
         `t_start_time`
@@ -14,6 +15,7 @@
       VALUES
         (
           #{blogContentBean.id},
+          #{blogContentBean.title},
           #{blogContentBean.content},
           #{blogContentBean.state},
           #{blogContentBean.startTime}

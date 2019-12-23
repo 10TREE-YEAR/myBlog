@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class BlogContentBean {
     private String id;// id
+    private String title; // 标题
     private String content; // 内容
     private String state; // 状态
     private String startTime;// 开始时间
