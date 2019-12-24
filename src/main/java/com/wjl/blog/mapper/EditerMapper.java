@@ -3,6 +3,8 @@ package com.wjl.blog.mapper;
 import com.wjl.blog.entity.BlogContentBean;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 博客管理数据传输层
  */
@@ -14,4 +16,10 @@ public interface EditerMapper {
      * @return
      */
     boolean insertBlogContert(@Param(value = "blogContentBean") BlogContentBean blogContentBean);
+
+    /**
+     * 查询博客信息
+     * @return
+     */
+    List<BlogContentBean> queryBlogContentList();
 }

@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -42,5 +43,14 @@ public class EditerServiceImpl implements EditerService {
         blogContentBean.setStartTime(dateTime.get().format(new Date()));
         blogContentBean.setState("1");
         return editerMapper.insertBlogContert(blogContentBean);
+    }
+
+    /**
+     * 查询修改的博客信息
+     * @return
+     */
+    @Override
+    public List<BlogContentBean> queryBlogContentList() {
+        return editerMapper.queryBlogContentList();
     }
 }

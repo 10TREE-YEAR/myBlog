@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.text.AbstractDocument;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 博客编辑控制层
@@ -77,7 +79,11 @@ public class EditController {
     @GetMapping(value = "/blogModify.html")
     public ModelAndView getEditModfiyPage(){
         ModelAndView modelAndView = new ModelAndView();
-        // 1.0 校验是否有登录信息
+        // 1.0 查询博客信息
+        List<BlogContentBean> blogContentBeans = editerService.queryBlogContentList();
+        if(blogContentBeans.size()>0){
+            modelAndView.addObject("blogContentBeans",blogContentBeans);
+        }
 
         // 2.0 返回页面
         modelAndView.setViewName("/back/pages/blogModify");

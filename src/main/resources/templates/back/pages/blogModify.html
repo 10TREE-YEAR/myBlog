@@ -50,12 +50,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Panels and Wells</h1>
+                    <h1 class="page-header">博 客 内 容</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
+<!--            <div class="row">
                 <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.col-lg-4 -->
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
                 <div class="col-lg-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.col-lg-4 -->
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
                 <div class="col-lg-4">
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -97,9 +97,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.col-lg-4 -->
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
             </div>
-            <!-- /.row -->
+            &lt;!&ndash; /.row &ndash;&gt;
             <div class="row">
                 <div class="col-lg-4">
                     <div class="panel panel-success">
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.col-lg-4 -->
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
                 <div class="col-lg-4">
                     <div class="panel panel-warning">
                         <div class="panel-heading">
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.col-lg-4 -->
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
                 <div class="col-lg-4">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
@@ -142,52 +142,52 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.col-lg-4 -->
-            </div>
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+            </div>-->
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
+                <div class="col-lg-4" th:each="blogContentBean : ${blogContentBeans}">
+                    <div class="panel panel-green" th:class="'panel panel-green'">
+                        <div class="panel-heading" th:text="${blogContentBean.title}" style="height: 40px">
                             Green Panel
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" th:text="${blogContentBean.content}" style="height: 100px">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
                         </div>
-                        <div class="panel-footer">
-                            Panel Footer
+                        <div class="panel-footer" style="height: 40px">
+                            修改
                         </div>
                     </div>
                     <!-- /.col-lg-4 -->
                 </div>
-                <div class="col-lg-4">
+             <!--   <div class="col-lg-4">
                     <div class="panel panel-yellow">
-                        <div class="panel-heading">
+                        <div class="panel-heading" th:text="${blogContentBean.title}">
                             Yellow Panel
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" th:text="${blogContentBean.content}">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
                         </div>
                         <div class="panel-footer">
                             Panel Footer
                         </div>
                     </div>
-                    <!-- /.col-lg-4 -->
+                    &lt;!&ndash; /.col-lg-4 &ndash;&gt;
                 </div>
                 <div class="col-lg-4">
                     <div class="panel panel-red">
-                        <div class="panel-heading">
+                        <div class="panel-heading" th:text="${blogContentBean.title}">
                             Red Panel
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" th:text="${blogContentBean.content}">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
                         </div>
                         <div class="panel-footer">
                             Panel Footer
                         </div>
                     </div>
-                    <!-- /.col-lg-4 -->
-                </div>
+                    &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+                </div>-->
             </div>
         </div>
         <!-- /.container-fluid -->
