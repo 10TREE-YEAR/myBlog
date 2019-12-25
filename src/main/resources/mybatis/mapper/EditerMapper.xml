@@ -25,6 +25,21 @@
         SELECT
           `t_id` as id,
           `t_title` as title,
+           SUBSTRING(`t_blog_content`,1,120) AS content,
+          `t_state` as state,
+          `t_start_time` as startTime,
+          `t_end_time` as endTime,
+          `t_sort` as sort,
+          `t_number` as number
+        FROM
+          `jdbc`.`T_BOLG_CONTENT`
+        WHERE T_STATE = '1'
+    </select>
+
+    <select id="queryBlogContent" resultType="com.wjl.blog.entity.BlogContentBean">
+        SELECT
+          `t_id` as id,
+          `t_title` as title,
           `t_blog_content` as content,
           `t_state` as state,
           `t_start_time` as startTime,
@@ -33,6 +48,25 @@
           `t_number` as number
         FROM
           `jdbc`.`T_BOLG_CONTENT`
+        WHERE t_id = #{id}
     </select>
 
+    <update id="updateBlogContent">
+        UPDATE
+          `jdbc`.`T_BOLG_CONTENT`
+        SET
+          `t_title` = #{blogContentBean.title},
+          `t_blog_content` = #{blogContentBean.content},
+          `t_end_time` = #{blogContentBean.endTime}
+        WHERE `t_id` = #{blogContentBean.id} ;
+    </update>
+
+    <update id="deleteBlogInfo">
+        UPDATE
+          `jdbc`.`T_BOLG_CONTENT`
+        SET
+          `t_state` = '0',
+          `t_end_time` = #{time}
+        WHERE `t_id` = #{id} ;
+    </update>
 </mapper>

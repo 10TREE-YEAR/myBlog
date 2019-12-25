@@ -23,4 +23,25 @@ public interface EditerService {
      * @return
      */
     List<BlogContentBean> queryBlogContentList();
+
+    /**
+     * 查询单个博客内容
+     * @param id
+     * @return
+     */
+    BlogContentBean queryBlogContent(String id);
+
+    /**
+     * 修改博客信息
+     * @param blogContentBean
+     * @return
+     */
+    boolean updateBlogContent(BlogContentBean blogContentBean);
+
+    /**
+     * 删除博客信息
+     * @param id
+     * @return
+     */
+    boolean deleteBlogInfo(String id);
 }

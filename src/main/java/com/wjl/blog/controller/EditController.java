@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -73,7 +74,7 @@ public class EditController {
     }
 
     /**
-     * 返回博客修改页面
+     * 博客修改页面
      * @return
      */
     @GetMapping(value = "/blogModify.html")
@@ -84,10 +85,72 @@ public class EditController {
         if(blogContentBeans.size()>0){
             modelAndView.addObject("blogContentBeans",blogContentBeans);
         }
-
         // 2.0 返回页面
         modelAndView.setViewName("/back/pages/blogModify");
         return modelAndView;
     }
 
+    /**
+     *  查询需要修改的博客内容，及返回页面
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/editBlog.html")
+    public ModelAndView editBlogPage(@RequestParam(value = "id") String id){
+        ModelAndView andView = new ModelAndView();
+        // 1.0 根据id查询需要修改的博客id内容
+        BlogContentBean blogContentBean = editerService.queryBlogContent(id);
+        // 2.0 返回页面信息
+        andView.addObject("blogContentBean",blogContentBean);
+        andView.setViewName("/back/pages/blogEdit");
+        return andView;
+    }
+
+    /**
+     * 修改博客内容
+     * @return
+     */
+    @PostMapping(value = "/getEditBlog.html")
+    @ResponseBody
+    public ResultInfo editBlogContent(BlogContentBean blogContentBean){
+        ResultInfo resultInfo = new ResultInfo();
+        try {
+            // 1.0 修改博客信息
+            boolean i = editerService.updateBlogContent(blogContentBean);
+            if(i){
+                resultInfo.setResultMsg("修改成功");
+                resultInfo.setResultCode("200");
+            }else{
+                resultInfo.setResultMsg("修改失败");
+                resultInfo.setResultCode("400");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultInfo.setResultMsg("程序报错，请查日志");
+            resultInfo.setResultCode("400");
+        }
+        return resultInfo;
+    }
+
+    /**
+     * 删除博客信息
+     * @param id
+     * @return
+     */
+    @PostMapping(value = "/deleteBlog.html")
+    @ResponseBody
+    public ResultInfo deleteBlogInfo(@RequestParam(value = "id") String id){
+        ResultInfo resultInfo = new ResultInfo();
+        // 1.0 根据博客id删除信息（逻辑删除）
+        boolean i= editerService.deleteBlogInfo(id);
+        // 2.0 返回信息
+        if(i){
+            resultInfo.setResultMsg("删除成功！");
+            resultInfo.setResultCode("200");
+        }else{
+            resultInfo.setResultMsg("删除失败！");
+            resultInfo.setResultCode("400");
+        }
+        return resultInfo;
+    }
 }

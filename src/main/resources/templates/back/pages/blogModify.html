@@ -151,11 +151,12 @@
                         <div class="panel-heading" th:text="${blogContentBean.title}" style="height: 40px">
                             Green Panel
                         </div>
-                        <div class="panel-body" th:text="${blogContentBean.content}" style="height: 100px">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        <div class="panel-body" style="height: 100px;">
+                            <p th:text="${blogContentBean.content}" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
                         </div>
-                        <div class="panel-footer" style="height: 40px">
-                            修改
+                        <div class="panel-footer" style="height: 55px">
+                            <button type="button" class="btn btn-primary" id="editBlog" th:onclick="blog.editBlog([[${blogContentBean.id}]])">修改</button>
+                            <button type="button" class="btn btn-danger" id="deleteBlog" th:onclick="blog.deleteBlog([[${blogContentBean.id}]])">删除</button>
                         </div>
                     </div>
                     <!-- /.col-lg-4 -->
@@ -223,6 +224,6 @@
 <script src="lib/jquery.flowchart.min.js" th:src="@{/static/back/edit/lib/jquery.flowchart.min.js}"></script>
 
 <script src="js/editormd.js" th:src="@{/static/back/edit/js/editormd.js}"></script>
-
+<script src="js/editormd.js" th:src="@{/static/back/js/blog/blog.js}"></script>
 </body>
 </html>

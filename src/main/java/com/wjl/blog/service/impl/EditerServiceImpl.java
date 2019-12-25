@@ -53,4 +53,46 @@ public class EditerServiceImpl implements EditerService {
     public List<BlogContentBean> queryBlogContentList() {
         return editerMapper.queryBlogContentList();
     }
+
+    /**
+     * 查询博客单个内容
+     * @param id
+     * @return
+     */
+    @Override
+    public BlogContentBean queryBlogContent(String id) {
+        return editerMapper.queryBlogContent(id);
+    }
+
+    /**
+     * 修改博客信息
+     * @param blogContentBean
+     * @return
+     */
+    @Override
+    public boolean updateBlogContent(BlogContentBean blogContentBean) {
+        blogContentBean.setEndTime(dateTime.get().format(new Date()));
+        int i = editerMapper.updateBlogContent(blogContentBean);
+        if(i>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 删除博客信息
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean deleteBlogInfo(String id) {
+        String time = dateTime.get().format(new Date());
+        int i =editerMapper.deleteBlogInfo(id, time);
+        if(i>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
