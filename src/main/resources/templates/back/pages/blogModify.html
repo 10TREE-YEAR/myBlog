@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Startmin - Bootstrap Admin Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" th:href="@{/static/back/css/bootstrap.min.css}">
+
+    <!-- MetisMenu CSS -->
+    <link href="../css/metisMenu.min.css" rel="stylesheet" th:href="@{/static/back/css/metisMenu.min.css}">
+
+    <!-- Timeline CSS -->
+    <link href="../css/timeline.css" rel="stylesheet" th:href="@{/static/back/css/timeline.css}">
+
+    <!-- Custom CSS -->
+    <link href="../css/startmin.css" rel="stylesheet" th:href="@{/static/back/css/startmin.css}">
+
+    <!-- Morris Charts CSS -->
+    <link href="../css/morris.css" rel="stylesheet" th:href="@{/static/back/css/morris.css}">
+
+    <!-- Custom Fonts -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" th:href="@{/static/back/css/font-awesome.min.css}">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" />
+
+
+    <!--<link rel="stylesheet" href="css/style.css" th:href="@{/static/back/edit/css/style.css}"/>-->
+    <link rel="stylesheet" href="css/editormd.css" th:href="@{/static/back/edit/css/editormd.css}"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <div th:replace="~{back/pages/head :: header-nav}"></div>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">博 客 内 容</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+<!--            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Default Panel
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        </div>
+                        <div class="panel-footer">
+                            Panel Footer
+                        </div>
+                    </div>
+                </div>
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+                <div class="col-lg-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Primary Panel
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        </div>
+                        <div class="panel-footer">
+                            Panel Footer
+                        </div>
+                    </div>
+                </div>
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+                <div class="col-lg-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Info Panel
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        </div>
+                        <div class="panel-footer">
+                            Panel Footer
+                        </div>
+                    </div>
+                </div>
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+            </div>
+            &lt;!&ndash; /.row &ndash;&gt;
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Success Panel
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        </div>
+                        <div class="panel-footer">
+                            Panel Footer
+                        </div>
+                    </div>
+                </div>
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+                <div class="col-lg-4">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            Warning Panel
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        </div>
+                        <div class="panel-footer">
+                            Panel Footer
+                        </div>
+                    </div>
+                </div>
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+                <div class="col-lg-4">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            Danger Panel
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        </div>
+                        <div class="panel-footer">
+                            Panel Footer
+                        </div>
+                    </div>
+                </div>
+                &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+            </div>-->
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-4" th:each="blogContentBean : ${blogContentBeans}">
+                    <div class="panel panel-green" th:class="'panel panel-green'">
+                        <div class="panel-heading" th:text="${blogContentBean.title}" style="height: 40px">
+                            Green Panel
+                        </div>
+                        <div class="panel-body" th:text="${blogContentBean.content}" style="height: 100px">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        </div>
+                        <div class="panel-footer" style="height: 40px">
+                            修改
+                        </div>
+                    </div>
+                    <!-- /.col-lg-4 -->
+                </div>
+             <!--   <div class="col-lg-4">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading" th:text="${blogContentBean.title}">
+                            Yellow Panel
+                        </div>
+                        <div class="panel-body" th:text="${blogContentBean.content}">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        </div>
+                        <div class="panel-footer">
+                            Panel Footer
+                        </div>
+                    </div>
+                    &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-red">
+                        <div class="panel-heading" th:text="${blogContentBean.title}">
+                            Red Panel
+                        </div>
+                        <div class="panel-body" th:text="${blogContentBean.content}">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                        </div>
+                        <div class="panel-footer">
+                            Panel Footer
+                        </div>
+                    </div>
+                    &lt;!&ndash; /.col-lg-4 &ndash;&gt;
+                </div>-->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="../js/jquery.min.js" th:src="@{/static/back/js/jquery.min.js}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../js/bootstrap.min.js" th:src="@{/static/back/js/bootstrap.min.js}"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../js/metisMenu.min.js" th:src="@{/static/back/js/metisMenu.min.js}"></script>
+
+<!-- Morris Charts JavaScript -->
+<script src="../js/raphael.min.js" th:src="@{/static/back/js/raphael.min.js}"></script>
+<!--<script src="../js/morris.min.js" th:src="@{/static/back/js/morris.min.js}"></script>-->
+<!--<script src="../js/morris-data.js" th:src="@{/static/back/js/morris-data.js}"></script>-->
+
+<!-- Custom Theme JavaScript -->
+<script src="../js/startmin.js" th:src="@{/static/back/js/startmin.js}"></script>
+<script src="js/editormd.min.js" th:src="@{/static/back/edit/js/editormd.min.js}"></script>
+<script src="lib/marked.min.js" th:src="@{/static/back/edit/lib/marked.min.js}"></script>
+<script src="lib/prettify.min.js" th:src="@{/static/back/edit/lib/prettify.min.js}"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="lib/raphael.min.js" th:src="@{/static/back/edit/lib/raphael.min.js}"></script>
+<script src="lib/underscore.min.js" th:src="@{/static/back/edit/lib/underscore.min.js}"></script>
+<script src="lib/sequence-diagram.min.js" th:src="@{/static/back/edit/lib/sequence-diagram.min.js}"></script>
+<script src="lib/flowchart.min.js" th:src="@{/static/back/edit/lib/flowchart.min.js}"></script>
+<script src="lib/jquery.flowchart.min.js" th:src="@{/static/back/edit/lib/jquery.flowchart.min.js}"></script>
+
+<script src="js/editormd.js" th:src="@{/static/back/edit/js/editormd.js}"></script>
+
+</body>
+</html>

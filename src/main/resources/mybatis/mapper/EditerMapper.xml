@@ -5,7 +5,34 @@
 <mapper namespace="com.wjl.blog.mapper.EditerMapper">
 
   <insert id="insertBlogContert">
-
+    INSERT INTO `T_BOLG_CONTENT` (
+        `t_id`,
+        `t_title`,
+        `t_blog_content`,
+        `t_state`,
+        `t_start_time`
+      )
+      VALUES
+        (
+          #{blogContentBean.id},
+          #{blogContentBean.title},
+          #{blogContentBean.content},
+          #{blogContentBean.state},
+          #{blogContentBean.startTime}
+        )
   </insert>
+    <select id="queryBlogContentList" resultType="com.wjl.blog.entity.BlogContentBean">
+        SELECT
+          `t_id` as id,
+          `t_title` as title,
+          `t_blog_content` as content,
+          `t_state` as state,
+          `t_start_time` as startTime,
+          `t_end_time` as endTime,
+          `t_sort` as sort,
+          `t_number` as number
+        FROM
+          `jdbc`.`T_BOLG_CONTENT`
+    </select>
 
 </mapper>
