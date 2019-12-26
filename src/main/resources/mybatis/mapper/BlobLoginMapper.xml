@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wjl.blog.mapper.BlobLoginMapper">
+
+    <select id="quertBlogContentList" resultType="com.wjl.blog.entity.BlogContentBean">
+      SELECT
+          `t_id` as id,
+          `t_title` as title,
+           SUBSTRING(`t_blog_content`,1,120) AS content,
+          `t_state` as state,
+          `t_start_time` as startTime,
+          `t_end_time` as endTime,
+          `t_sort` as sort,
+          `t_number` as number
+        FROM
+          `jdbc`.`T_BOLG_CONTENT`
+        WHERE T_STATE = '1'
+    </select>
+
+</mapper>

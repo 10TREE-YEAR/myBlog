@@ -1,370 +1,186 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-  	<title>KOMPLEET</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free Responsive Html5 Templates">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- styles -->
-	
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" th:href="@{/static/blog/css/bootstrap.min.css}">
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" th:href="@{/static/blog/font-awesome/css/font-awesome.min.css}"/>
-	<link rel="stylesheet" href="css/style.css" th:href="@{/static/blog/css/style.css}">
-	<link rel="stylesheet" href="css/menu.min.css" th:href="@{/static/blog/css/menu.min.css}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-	<script src="js/html5shiv.js" th:src="@{/static/blog/js/html5shiv.js}"></script>
-	<script src="js/respond.min.js" th:src="@{/static/blog/js/respond.min.js}"></script>
-</head>
+    <!-- Fontawesome -->
 
-<body id="wrapper">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
-	<!-- /////////////////////////////////////////Navigation -->
-	<button id="mm-menu-toggle" class="mm-menu-toggle">Toggle Menu</button>
-	<nav id="mm-menu" class="mm-menu">
-		<div class="mm-menu__header">
-			<h2 class="mm-menu__title">KOMPLEET</h2>
-		</div>
-		<ul class="mm-menu__items">
-			<li class="mm-menu__item">
-			  <a class="mm-menu__link" href="index.html">
-				<span class="mm-menu__link-text"><i class="fa fa-home"></i> Home</span>
-			  </a>
-			</li>
-			<li class="mm-menu__item">
-			  <a class="mm-menu__link" href="index.html">
-				<span class="mm-menu__link-text"><i class="fa fa-user"></i> Blog</span>
-			  </a>
-			</li>
-			<li class="mm-menu__item">
-			  <a class="mm-menu__link" href="single.html">
-				<span class="mm-menu__link-text"><i class="fa fa-inbox"></i> About</span>
-			  </a>
-			</li>
-			<li class="mm-menu__item">
-			  <a class="mm-menu__link" href="contact.html">
-				<span class="mm-menu__link-text"><i class="fa fa-heart"></i> Contact</span>
-			  </a>
-			</li>
-		</ul>
-	</nav><!-- /nav -->
-	
-	<!-- /////////////////////////////////////////Header -->
-	<div class="top-header">
+
+    <link rel="stylesheet" type="text/css" href="./styles.css" th:href="@{/static/blog/styles.css}">
+
+    <title>Roundy - A Minimal Bootstrap Blogging Tempate</title>
+  </head>
+  <body>
+    
+
+
+<div class="container-fluid" id="header">
+
+	<nav class="navbar navbar-expand-md navbar-light">
 		<div class="container">
-			<ul class="list-inline top-social">
-				<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-				<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-				<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <a class="navbar-brand" href="#"><img src="./img/logo.png" th:src="@{/static/blog/img/logo.png}"></a>
+
+
+		<div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
+
+		                <ul class="navbar-nav">
+		                    <li class="nav-item">
+		                    <a class="nav-link" href="#">Travel Tips</a>
+		                  </li>
+		                <li class="nav-item">
+		                  <a class="nav-link" href="#">Get Inspired</a>
+		                </li>
+
+		                <li class="nav-item">
+		                  <a class="nav-link" href="#">Cheap Airfare</a>
+		                </li>
+
+		                <li class="nav-item">
+		                  <a class="nav-link" href="#">About</a>
+		                </li>
+		            </ul>
+		  </div>
+	  </div>
+	  </nav>
+
+	  <!-- hero section -->
+	  <div class="container" id="hero">
+	  	<div class="row justify-content-end">
+	  		<div class="col-lg-6 hero-img-container">
+	  			<a href="./single.html">
+	  			<div class="hero-img">
+	  				<img src="./img/hero-img.png" th:src="@{/static/blog/img/hero-img.png}">
+	  			</div>
+	  			</a>
+	  		</div>
+
+	  		<div class="col-lg-9">
+	  			<div class="hero-title">
+	  				<a href="./single.html">
+	  				<h1>To theory equation, more have the or to was the</h1>
+	  				</a>
+	  			</div>
+
+	  		</div>
+
+	  		<div class="col-lg-6">
+	  			<div class="hero-meta">
+	  				<p>Herself of that similar live good up which is are to for French endeavours, screen.</p>
+	  				<div class="author">
+	  					<div class="author-img"><img src="./img/author-img.png" th:src="@{/static/blog/img/author-img.png}"></div>
+	  					<div class="author-meta">
+	  					<span class="author-name">Celeste Connell</span>
+	  					<span class="author-tag">Travel Blogger</span>
+	  					</div>
+	  				</div>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+</div>
+<!-- hero ends -->
+
+<!-- Article Grid -->
+
+<div class="container mt-2 mb-2 pt-5 pb-5" id="article-grid">
+	<div class="row justify-content-center">
+
+		<div class="col-xl-6 col-lg-12 text-center" th:each="blogContentBean: ${blogContentBeans}">
+			<a href="./single.html">
+			<div class="article-card">
+			<div class="article-img">
+				<img src="./img/1.jpeg" th:src="@{/static/blog/img/1.jpeg}">
+			</div>
+
+				<div class="article-meta text-left">
+					<h2 th:text="${blogContentBean.title}" style="width: 250px;height: 60px">I tighten my siddur, which they fail to someone else's</h2>
+					<p th:text="${blogContentBean.content}" style="width: 250px;height: 60px">Most of culture that the sensitivity of the condition of puppy love, my lemons.</p>
+				</div>
+			</div>
+			</a>
+		</div>
+
+
+	</div> <!-- Article Grid Row Ends -->
+</div> <!-- Article Grid Container Ends -->
+
+<!-- More articles button -->
+
+<div class="container text-center pb-3 mb-5">
+		<a href="#" class="btn btn-lg btn-light">More Articles</a>
+</div>
+
+
+<!-- Footer section  -->
+
+<footer class="container-fluid mt-1 p-4">
+	<div class="container ">
+		<div class="row pb-1"> 
+		<!-- Footer logo -->
+		<div class="col-lg-3 col-md-12"><img src="./img/logo.png" th:src="@{/static/blog/img/logo.png}"></div>
+
+		<!-- footer links -->
+		<div class="col-lg-6 col-md-12">
+			<ul class="nav justify-content-center">
+			  <li class="nav-item">
+			    <a class="nav-link active" href="#">Travel Tips</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="#">Get Inspired</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="#">Cheap Airfare</a>
+			  </li>			  
+			  <li class="nav-item">
+			    <a class="nav-link" href="#">About</a>
+			  </li>
 			</ul>
 		</div>
-	</div>
-	<div class="svg-container nav-svg svg-block">
-		<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
-		  <g transform="translate(0,-902.36218)"></g>
-		  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-		  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-		  <path d="M 0,150 0,0 1925,0"></path>
-		</svg>
-	</div>
-	<header id="masthead" class="site-header" role="banner" style="background-position: 50% -50px;">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="site-branding">
-				<a href="index.html" title="KOMPLEET"><img class="site-logo" src="images/logo.png" alt="KOMPLEET"></a>
-			</div><!-- .site-branding -->
+
+		<!-- footer social links -->
+		<!--<div class="col-lg-3 col-md-12">
+			<ul class="nav justify-content-end">
+			  <li class="nav-item">
+			    <a class="nav-link active btn btn-light" href="#"><i class="fab fa-facebook-f"></i></a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link active btn btn-light" href="#"><i class="fab fa-google"></i></a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link active btn btn-light" href="#"><i class="fab fa-twitter"></i></a>
+			  </li>
+			</ul>
+
+		</div>-->
+
+		<hr>
 		</div>
-		<div class="svg-container header-svg svg-block">
-			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
-				<g transform="translate(0,-902.36218)"></g>
-				  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-				  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-				  <path d="m 1925,0 0,150 -1925,0"></path>
-			</svg>
-		</div>		
-	</header><!-- #masthead -->
-	<!-- Header -->
-	
-	
-	<!-- /////////////////////////////////////////Content -->
-	<div id="page-content" class="index-page">
-		
-		<!-- ////////////Content Box 01 -->
-		<section class="box-content box-5 box-style-3" id="nav-blog">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="box-item">
-							<div class="svg-container post-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
-								  <g transform="translate(0,-902.36218)"></g>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="M 0,150 0,0 1925,0"></path>
-								</svg>
-							</div>
-							<div class="entry-thumb">
-								<img class="img-responsive" src="images/1.jpg" th:src="@{/static/blog/images/1.jpg}">
-								<a class="thumb-link" href="single.html"><i class="fa fa-link"></i></a>		
-							</div>
-							<div class="content">
-								<h3 class="entry-title">
-									<a href="single.html">Eget Metus Nec Leo</a>
-								</h3>
-								<p>Suspendisse porttitor sapien ac lectus euismod imperdiet. Curabitur nec nibh at massa pellentesque accumsan eu id nibh. Donec accumsan ut mi et tincidunt. Aliquam eget metus nec leo tempor bibendum. Phasellus tincidunt lobortis metus. Duis euismod lorem turpis at diam.</p>
-								<span>MAY 21, 2016 BY KOMPLEET</span><br>
-							</div>
-							<div class="read-more">
-								<a href="single.html">Continue reading …</a>
-							</div>
-							<div class="svg-container post-bottom-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
-									<g transform="translate(0,-902.36218)"></g>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 1925,0 0,150 -1925,0"></path>
-								</svg>
-							</div>	
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="box-item">
-							<div class="svg-container post-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
-								  <g transform="translate(0,-902.36218)"></g>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="M 0,150 0,0 1925,0"></path>
-								</svg>
-							</div>
-							<div class="entry-thumb">
-								<img class="img-responsive" src="images/3.jpg" th:src="@{/static/blog/images/3.jpg}">
-								<a class="thumb-link" href="single.html"><i class="fa fa-link"></i></a>		
-							</div>
-							<div class="content">
-								<h3 class="entry-title">
-									<a href="single.html">Donec In Massa Libero</a>
-								</h3>
-								<p>Nunc eu velit metus. Donec in massa libero. Donec bibendum orci a lorem scelerisque luctus. Aliquam et ante quis erat semper pretium. Pellentesque vehicula.</p>
-								<span>MAY 21, 2016 BY KOMPLEET</span><br>
-								<a class="btn btn-1" href="single.html">Read More</a>
-							</div>
-							<div class="read-more">
-								<a href="single.html">Continue reading …</a>
-							</div>
-							<div class="svg-container post-bottom-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
-									<g transform="translate(0,-902.36218)"></g>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 1925,0 0,150 -1925,0"></path>
-								</svg>
-							</div>
-						</div>
-						
-					</div>
-					<div class="col-md-4">
-						<div class="box-item">
-							<div class="svg-container post-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
-								  <g transform="translate(0,-902.36218)"></g>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="M 0,150 0,0 1925,0"></path>
-								</svg>
-							</div>
-							<div class="entry-thumb">
-								<img class="img-responsive" src="images/5.jpg" th:src="@{/static/blog/images/5.jpg}">
-								<a class="thumb-link" href="single.html"><i class="fa fa-link"></i></a>		
-							</div>
-							<div class="content">
-								<h3 class="entry-title">
-								<a href="single.html">Class Aptent Taciti Urna Bibendum Id</a>
-								</h3>
-								<p>Suspendisse porttitor sapien ac lectus euismod imperdiet. Curabitur nec nibh at massa pellentesque accumsan eu id nibh. Donec accumsan ut mi.</p>
-								<span>MAY 21, 2016 BY KOMPLEET</span><br>
-								<a class="btn btn-1" href="single.html">Read More</a>
-							</div>
-							<div class="read-more">
-								<a href="single.html">Continue reading …</a>
-							</div>
-							<div class="svg-container post-bottom-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
-									<g transform="translate(0,-902.36218)"></g>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 1925,0 0,150 -1925,0"></path>
-								</svg>
-							</div>
-						</div>
-						
-					</div>
-				</div><div class="tlinks">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
-				<div class="row">
-					<div class="col-md-4">
-						<div class="box-item">
-							<div class="svg-container post-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
-								  <g transform="translate(0,-902.36218)"></g>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="M 0,150 0,0 1925,0"></path>
-								</svg>
-							</div>
-							<div class="entry-thumb">
-								<img class="img-responsive" src="images/2.jpg" th:src="@{/static/blog/images/2.jpg}">
-								<a class="thumb-link" href="single.html"><i class="fa fa-link"></i></a>		
-							</div>
-							<div class="content">
-								<h3 class="entry-title">
-									<a href="single.html">Aliquam sed Placerat Non</a>
-								</h3>
-								<p>Suspendisse porttitor. Aliquam eget metus nec leo tempor bibendum. Phasellus tincidunt lobortis metus. Duis euismod lorem turpis, viverra feugiat ipsum volutpat vitae. Fusce justo turpis, sodales sed placerat non, suscipit at diam.</p>
-								<span>MAY 21, 2016 BY KOMPLEET</span><br>
-								<a class="btn btn-1" href="single.html">Read More</a>
-							</div>
-							<div class="read-more">
-								<a href="single.html">Continue reading …</a>
-							</div>
-							<div class="svg-container post-bottom-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
-									<g transform="translate(0,-902.36218)"></g>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 1925,0 0,150 -1925,0"></path>
-								</svg>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="box-item">
-							<div class="svg-container post-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
-								  <g transform="translate(0,-902.36218)"></g>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="M 0,150 0,0 1925,0"></path>
-								</svg>
-							</div>
-							<div class="entry-thumb">
-								<img class="img-responsive" src="images/4.jpg" th:src="@{/static/blog/images/4.jpg}">
-								<a class="thumb-link" href="single.html"><i class="fa fa-link"></i></a>		
-							</div>
-							<div class="content">
-								<h3 class="entry-title">
-									<a href="single.html">Tristique Et Vonvallis Commodo</a>
-								</h3>
-								<p>Class aptent taciti urna bibendum id. Duis a commodo lectus. Morbi id purus nec purus feugiat vestibulum. Suspendisse sapien ante, bibendum ac quam quis, imperdiet bibendum sem. Curabitur nibh magna, tristique et convallis…</p>
-								<span>MAY 21, 2016 BY KOMPLEET</span><br>
-								<a class="btn btn-1" href="single.html">Read More</a>
-							</div>
-							<div class="read-more">
-								<a href="single.html">Continue reading …</a>
-							</div>
-							<div class="svg-container post-bottom-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
-									<g transform="translate(0,-902.36218)"></g>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 1925,0 0,150 -1925,0"></path>
-								</svg>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="box-item">
-							<div class="svg-container post-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
-								  <g transform="translate(0,-902.36218)"></g>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-								  <path d="M 0,150 0,0 1925,0"></path>
-								</svg>
-							</div>
-							<div class="entry-thumb">
-								<img class="img-responsive" src="images/6.jpg" th:src="@{/static/blog/images/6.jpg}">
-								<a class="thumb-link" href="single.html"><i class="fa fa-link"></i></a>		
-							</div>
-							<div class="content">
-								<h3 class="entry-title">
-									<a href="single.html">Proin Nisi Luctus To Taciti</a>
-								</h3>
-								<p>Proin lobortis mattis odio non ornare. Sed tempor nisi eu hendrerit luctus. Class aptent taciti sociosqu ad litora torquent per conubia nostravelit id sem tincidunt convallis ac eget quam. Vestibulum posuere porttitor sapien .</p>
-								<span>MAY 21, 2016 BY KOMPLEET</span><br>
-								<a class="btn btn-1" href="single.html">Read More</a>
-							</div>
-							<div class="read-more">
-								<a href="single.html">Continue reading …</a>
-							</div>
-							<div class="svg-container post-bottom-svg svg-block">
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
-									<g transform="translate(0,-902.36218)"></g>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-									  <path d="m 1925,0 0,150 -1925,0"></path>
-								</svg>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		
-	</div>
-	
-	<div class="svg-container footer-svg svg-block">
-		
-		<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
-			<g transform="translate(0,-902.36218)"></g>
-			  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-			  <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
-			  <path d="m 1925,0 0,150 -1925,0"></path>
-		</svg>
-		</div>
-	<!-- /////////////////////////////////////////Footer -->
-	<footer>
-		<div class="wrap-footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<span class="copyright">Copyright &copy; Your Website <br/> More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></span>
-					</div>
-					<div class="col-md-4">
-						<ul class="list-inline social-buttons">
-							<li><a href="#"><i class="fa fa-twitter"></i></a>
-							</li>
-							<li><a href="#"><i class="fa fa-facebook"></i></a>
-							</li>
-							<li><a href="#"><i class="fa fa-linkedin"></i></a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-4">
-						<ul class="list-inline quicklinks">
-							<li><a href="#">Privacy Policy</a>
-							</li>
-							<li><a href="#">Terms of Use</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+		<hr>
+
+		<!-- copyright text -->
+		<div class="row pt-2">
+			<div class="col-lg-12 text-center">
+				<span>&copy NewToDesign All Rights Received. <div class="tlinks">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div></span>
 			</div>
 		</div>
-	</footer>
-	<!-- Footer -->
-	
-	<!-- Top Slider -->
-    <script src="static/js/jquery.js" th:src="@{/static/blog/js/jquery.js}"></script>
-   
-	<!-- Menu Js -->
-	<script src="js/materialMenu.js" th:src="@{/static/blog/js/materialMenu.js}"></script>
-	<script>
-	  var menu = new Menu;
-	</script>
-	
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js" th:src="@{/static/blog/js/bootstrap.min.js}"></script>
-</body>
+	</div>
+</footer>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
 </html>

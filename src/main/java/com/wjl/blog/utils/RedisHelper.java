@@ -46,7 +46,7 @@ public class RedisHelper<HK, T> {
         }
 
         public Long listPush(String key, T domain) {
-            return listOperations.rightPush(key, domain);
+            return listOperations.rightPushAll(key, domain);
         }
 
         public Long listUnshift(String key, T domain) {
