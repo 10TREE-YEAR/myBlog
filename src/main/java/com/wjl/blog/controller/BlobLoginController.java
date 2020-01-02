@@ -59,6 +59,7 @@ public class BlobLoginController {
         if(!StringUtils.isEmpty(id)){
             // 2.0 查询该博客信息，并返回页面
             BlogContentBean blogContentBean = blobLoginService.queryBlogIndex(id);
+            modelAndView.addObject("blogContentBean",blogContentBean);
             modelAndView.setViewName("/blog/single");
         }else{
             modelAndView.addObject("msg","该博客不存在");

@@ -23,7 +23,7 @@
       SELECT
           `t_id` as id,
           `t_title` as title,
-           SUBSTRING(`t_blog_content`,1,120) AS content,
+          `t_blog_content` AS content,
           `t_state` as state,
           `t_start_time` as startTime,
           `t_end_time` as endTime,
