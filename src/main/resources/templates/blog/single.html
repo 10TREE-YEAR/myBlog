@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
 
-    <link rel="stylesheet" type="text/css" href="styles.css">
+	  <link rel="stylesheet" type="text/css" href="./styles.css" th:href="@{/static/blog/styles.css}">
 
     <title>Roundy - A Minimal Bootstrap Blogging Tempate</title>
   </head>
@@ -28,7 +28,7 @@
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
-		  <a class="navbar-brand" href="./index.html"><img src="./img/logo.png"></a>
+		  <a class="navbar-brand" href="./index.html" th:href="@{/blogIndex.html}"><img src="./img/logo.png" th:src="@{/static/blog/img/logo.png}"></a>
 
 
 		<div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
@@ -58,7 +58,7 @@
 	  		<div class="col-lg-6 hero-img-container">
 	  			<div class="hero-img">
 	  				<!-- hero img -->
-	  				<img src="./img/hero-img-2.jpeg">
+	  				<img src="./img/hero-img-2.jpeg" th:src="@{/static/blog/img/hero-img-2.jpeg}">
 	  			</div>
 	  		</div>	  		
 
@@ -72,7 +72,7 @@
 	  		<div class="col-lg-6">
 	  			<div class="hero-meta">
 	  				<div class="author">
-	  					<div class="author-img"><img src="./img/author-img.png"></div>
+	  					<div class="author-img"><img src="./img/author-img.png" th:src="@{/static/blog/img/author-img.png}"></div>
 	  					<div class="author-meta">
 	  					<span class="author-name">Celeste Connell</span>
 	  					<span class="author-tag">Travel Blogger</span>
@@ -134,7 +134,7 @@
 			<a href="./single.html">
 			<div class="article-card">
 			<div class="article-img">
-				<img src="./img/5.jpeg">
+				<img src="./img/5.jpeg" th:src="@{/static/blog/img/5.jpeg}">
 			</div>
 
 				<div class="article-meta text-left">
@@ -149,7 +149,7 @@
 			<a href="./single.html">
 			<div class="article-card">
 			<div class="article-img">
-				<img src="./img/6.jpeg">
+				<img src="./img/6.jpeg" th:src="@{/static/blog/img/6.jpeg}">
 			</div>
 
 				<div class="article-meta text-left">
@@ -169,7 +169,7 @@
 	<div class="container ">
 		<div class="row pb-1"> 
 		<!-- Footer logo -->
-		<div class="col-lg-3 col-md-12"><img src="./img/logo.png"></div>
+		<div class="col-lg-3 col-md-12"><img src="./img/logo.png" th:src="@{/static/blog/img/logo.png}"></div>
 
 		<!-- footer links -->
 		<div class="col-lg-6 col-md-12">

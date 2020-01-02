@@ -14,4 +14,13 @@ public interface BlobLoginService {
      * @return
      */
     List<BlogContentBean> quertBlogContentList();
+
+    /** 
+    * @Description: 根据ID查询博客内容
+    * @Param: [id] 
+    * @return: com.wjl.blog.entity.BlogContentBean 
+    * @Author: wangjialu
+    * @Date: 2020/1/2 
+    */ 
+    BlogContentBean queryBlogIndex(String id);
 }

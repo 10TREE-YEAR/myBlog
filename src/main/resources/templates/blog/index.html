@@ -96,7 +96,7 @@
 	<div class="row justify-content-center">
 
 		<div class="col-xl-6 col-lg-12 text-center" th:each="blogContentBean: ${blogContentBeans}">
-			<a href="./single.html">
+			<a href="./single.html" th:href="@{/single.html(id=${blogContentBean.id})}">
 			<div class="article-card">
 			<div class="article-img">
 				<img src="./img/1.jpeg" th:src="@{/static/blog/img/1.jpeg}">
