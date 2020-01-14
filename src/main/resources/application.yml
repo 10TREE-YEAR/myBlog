@@ -1,4 +1,12 @@
 spring:
+  rabbitmq:
+    host: 192.168.25.130
+    port: 5673
+    username: guest
+    password: guest
+    publisher-confirms: true
+    virtual-host: /
+
   datasource:
     username: root
     password: root
