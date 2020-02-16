@@ -5,6 +5,8 @@ import com.wjl.blog.entity.ResultInfo;
 import com.wjl.blog.service.EditerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -31,6 +33,9 @@ public class EditController {
     @Resource(name = "EditerService")
     private EditerService editerService;
 
+    @Autowired
+    private AmqpTemplate rabbitTemplate;
+
     /**
      * 返回编辑页面
      * @return
@@ -55,21 +60,23 @@ public class EditController {
     public ResultInfo addTest(BlogContentBean blogContentBean){
         ResultInfo resultInfo = new ResultInfo();
         log.info(blogContentBean.getContent());// 打印博客内容
-        // 1.0 存入博客信息
-        if(!StringUtils.isEmpty(blogContentBean.getContent())){
-            boolean i =  editerService.insertBlogContert(blogContentBean);
-            // 2.0 校验是否存入成功
-            if(i){
-                resultInfo.setResultMsg("添加成功！");
-                resultInfo.setResultCode("200");
-            }else{
-                resultInfo.setResultMsg("添加失败！");
-                resultInfo.setResultCode("400");
-            }
-        }else{
-            resultInfo.setResultMsg("请填写内容！！！");
-            resultInfo.setResultCode("400");
-        }
+
+        this.rabbitTemplate.convertAndSend("exchange", "topic.messages", resultInfo);
+//        // 1.0 存入博客信息
+//        if(!StringUtils.isEmpty(blogContentBean.getContent())){
+//            boolean i =  editerService.insertBlogContert(blogContentBean);
+//            // 2.0 校验是否存入成功
+//            if(i){
+//                resultInfo.setResultMsg("添加成功！");
+//                resultInfo.setResultCode("200");
+//            }else{
+//                resultInfo.setResultMsg("添加失败！");
+//                resultInfo.setResultCode("400");
+//            }
+//        }else{
+//            resultInfo.setResultMsg("请填写内容！！！");
+//            resultInfo.setResultCode("400");
+//        }
         return resultInfo;
     }
 
