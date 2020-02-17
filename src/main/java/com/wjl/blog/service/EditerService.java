@@ -2,6 +2,7 @@ package com.wjl.blog.service;
 
 
 import com.wjl.blog.entity.BlogContentBean;
+import com.wjl.blog.entity.BlogSaveFailBean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,4 +45,14 @@ public interface EditerService {
      * @return
      */
     boolean deleteBlogInfo(String id);
+
+
+    /**
+    * @Description:  添加博客创建失败内容
+    * @Param: [blogSaveFailBean]
+    * @return: boolean
+    * @Author: wangjialu
+    * @Date: 2020/2/17
+    */
+    boolean insertBlogSaveFail(BlogSaveFailBean blogSaveFailBean);
 }

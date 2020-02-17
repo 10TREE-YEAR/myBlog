@@ -69,4 +69,22 @@
           `t_end_time` = #{time}
         WHERE `t_id` = #{id} ;
     </update>
+
+    <insert id="insertBlogSaveFail">
+        INSERT INTO `jdbc`.`T_NEWS_FAIL` (
+          `T_ID`,
+          `T_CONTENT`,
+          `T_START`,
+          `T_TIME`,
+          `T_TYEP`
+        )
+        VALUES
+          (
+            #{blogSaveFailBean.id},
+            #{blogSaveFailBean.content},
+            #{blogSaveFailBean.start},
+            #{blogSaveFailBean.time},
+            #{blogSaveFailBean.type}
+          )
+    </insert>
 </mapper>

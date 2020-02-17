@@ -61,9 +61,9 @@ public class EditController {
         ResultInfo resultInfo = new ResultInfo();
         log.info(blogContentBean.getContent());// 打印博客内容
 
-        this.rabbitTemplate.convertAndSend("exchange", "topic.messages", resultInfo);
-//        // 1.0 存入博客信息
-//        if(!StringUtils.isEmpty(blogContentBean.getContent())){
+        this.rabbitTemplate.convertAndSend("exchange", "topic.messages", blogContentBean);
+        // 1.0 存入博客信息
+        if(!StringUtils.isEmpty(blogContentBean.getContent())){
 //            boolean i =  editerService.insertBlogContert(blogContentBean);
 //            // 2.0 校验是否存入成功
 //            if(i){
@@ -73,10 +73,12 @@ public class EditController {
 //                resultInfo.setResultMsg("添加失败！");
 //                resultInfo.setResultCode("400");
 //            }
-//        }else{
-//            resultInfo.setResultMsg("请填写内容！！！");
-//            resultInfo.setResultCode("400");
-//        }
+            resultInfo.setResultMsg("添加成功！");
+            resultInfo.setResultCode("200");
+        }else{
+            resultInfo.setResultMsg("请填写内容！！！");
+            resultInfo.setResultCode("400");
+        }
         return resultInfo;
     }
 

@@ -2,11 +2,13 @@ package com.wjl.blog.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 博客内容存入bean
  */
 @Data
-public class BlogContentBean {
+public class BlogContentBean implements Serializable {
     private String id;// id
     private String title; // 标题
     private String content; // 内容

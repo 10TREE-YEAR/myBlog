@@ -1,6 +1,7 @@
 package com.wjl.blog.service.impl;
 
 import com.wjl.blog.entity.BlogContentBean;
+import com.wjl.blog.entity.BlogSaveFailBean;
 import com.wjl.blog.mapper.EditerMapper;
 import com.wjl.blog.service.EditerService;
 import org.slf4j.Logger;
@@ -94,5 +95,17 @@ public class EditerServiceImpl implements EditerService {
         }else{
             return false;
         }
+    }
+
+    /** 
+    * @Description: 保存消息队列失败内容
+    * @Param: [blogSaveFailBean] 
+    * @return: boolean 
+    * @Author: wangjialu
+    * @Date: 2020/2/17 
+    */ 
+    @Override
+    public boolean insertBlogSaveFail(BlogSaveFailBean blogSaveFailBean) {
+        return editerMapper.insertBlogSaveFail(blogSaveFailBean);
     }
 }

@@ -1,6 +1,7 @@
 package com.wjl.blog.mapper;
 
 import com.wjl.blog.entity.BlogContentBean;
+import com.wjl.blog.entity.BlogSaveFailBean;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -44,4 +45,13 @@ public interface EditerMapper {
      * @return
      */
     int deleteBlogInfo(@Param(value = "id") String id, @Param(value = "time") String time);
+
+    /** 
+    * @Description: 保存消息失败数据传输接口
+    * @Param: [blogSaveFailBean] 
+    * @return: boolean 
+    * @Author: wangjialu
+    * @Date: 2020/2/17 
+    */ 
+    boolean insertBlogSaveFail(@Param(value = "blogSaveFailBean") BlogSaveFailBean blogSaveFailBean);
 }
