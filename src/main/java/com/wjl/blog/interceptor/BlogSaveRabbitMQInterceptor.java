@@ -14,13 +14,13 @@ import java.util.Date;
 import java.util.UUID;
 
 @Component
-@RabbitListener(queues = "topic.messages")
+@RabbitListener(queues = "blog.messages")
 public class BlogSaveRabbitMQInterceptor {
 
     private ThreadLocal<DateFormat> dateTime = new ThreadLocal<DateFormat>(){
         @Override
         protected DateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-DD HHSSMM");
+            return new SimpleDateFormat("yyyy-MM-dd hhmmSS");
         }
     };
 

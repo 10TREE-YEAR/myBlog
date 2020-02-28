@@ -1,6 +1,7 @@
 package com.wjl.blog.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -8,7 +9,9 @@ import java.io.Serializable;
  * 博客内容存入bean
  */
 @Data
+@Accessors(chain = true)
 public class BlogContentBean implements Serializable {
+
     private String id;// id
     private String title; // 标题
     private String content; // 内容

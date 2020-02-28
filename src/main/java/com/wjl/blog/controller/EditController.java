@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.AbstractDocument;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +58,7 @@ public class EditController {
         ResultInfo resultInfo = new ResultInfo();
         log.info(blogContentBean.getContent());// 打印博客内容
 
-        this.rabbitTemplate.convertAndSend("exchange", "topic.messages", blogContentBean);
+        this.rabbitTemplate.convertAndSend("blog_exchange", "blog.messages.save", blogContentBean);
         // 1.0 存入博客信息
         if(!StringUtils.isEmpty(blogContentBean.getContent())){
 //            boolean i =  editerService.insertBlogContert(blogContentBean);

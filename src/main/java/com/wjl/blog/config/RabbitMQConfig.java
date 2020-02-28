@@ -40,28 +40,28 @@ public class RabbitMQConfig {
 
     //===============以下是验证topic Exchange的队列==========
     // Bean默认的name是方法名
-    @Bean(name="message")
-    public Queue queueMessage() {
-        return new Queue("topic.message");
-    }
+//    @Bean(name="message")
+//    public Queue queueMessage() {
+//        return new Queue("topic.message");
+//    }
 
     @Bean(name="messages")
     public Queue queueMessages() {
-        return new Queue("topic.messages");
+        return new Queue("blog.messages");
     }
     //===============以上是验证topic Exchange的队列==========
 
     @Bean
     TopicExchange exchange() {
         // 参数1为交换机的名称
-        return new TopicExchange("exchange");
+        return new TopicExchange("blog_exchange");
     }
 
-    @Bean
-    // 如果参数名和上面用到方法名称一样，可以不用写@Qualifier
-    Binding bindingExchangeMessage(@Qualifier("message")Queue queueMessage, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
-    }
+//    @Bean
+//    // 如果参数名和上面用到方法名称一样，可以不用写@Qualifier
+//    Binding bindingExchangeMessage(@Qualifier("message")Queue queueMessage, TopicExchange exchange) {
+//        return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
+//    }
 
     /**
      * 将队列topic.messages与exchange绑定，routing_key为topic.#,模糊匹配
@@ -71,7 +71,7 @@ public class RabbitMQConfig {
      */
     @Bean
     Binding bindingExchangeMessages(@Qualifier("messages")Queue queueMessages, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessages).to(exchange).with("topic.#");
+        return BindingBuilder.bind(queueMessages).to(exchange).with("blog.#.save");
     }
 
     @Bean
@@ -98,7 +98,8 @@ public class RabbitMQConfig {
                     log.info("消息发送失败:correlationData({}),ack({}),cause({})",correlationData,ack,cause);
                 }
             }
-        });
+         });
+
         rabbitTemplate.setReturnCallback(new RabbitTemplate.ReturnCallback() {
             @Override
             public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
