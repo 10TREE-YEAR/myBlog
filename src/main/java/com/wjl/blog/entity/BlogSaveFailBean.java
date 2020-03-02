@@ -10,5 +10,5 @@ public class BlogSaveFailBean {
     private String start;// 失败消息的状态
     private String time;// 失败消息的时间
     private String blogPeople;// 失败消息的内容创建人
-    private String type;// 类型：1 添加失败 2 消息内容不存在失败
+    private String type;// 类型：1 添加失败 2 消息内容不存在失败 3 es同步失败出错
 }
