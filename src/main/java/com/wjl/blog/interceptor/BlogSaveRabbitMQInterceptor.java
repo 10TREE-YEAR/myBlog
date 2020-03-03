@@ -54,18 +54,40 @@ public class BlogSaveRabbitMQInterceptor {
                 BlogSaveFailBean blogSaveFailBean = this.getBlogSaveFailBean("1",msg.getContent());
                 boolean i = editerService.insertBlogSaveFail(blogSaveFailBean);
             }
-            // 4.0 存入成功将信息同步es
-            BlogEsContentBean blogEsContentBean = convertBean(msg,BlogEsContentBean.class);
-            BlogEsContentBean blogContentBean = blogEsSaveRepository.save(blogEsContentBean);
-            if(StringUtils.isEmpty(blogContentBean.getId())){
-                BlogSaveFailBean blogSaveFailBean = this.getBlogSaveFailBean("3",msg.getContent());
-                boolean i = editerService.insertBlogSaveFail(blogSaveFailBean);
+            try {
+                // 4.0 存入成功将信息同步es
+                BlogEsContentBean blogEsContentBean = this.convertBlogEsContentBean(msg);
+
+                BlogEsContentBean blogContentBean = blogEsSaveRepository.save(blogEsContentBean);
+                if(StringUtils.isEmpty(blogContentBean.getId())){
+                    BlogSaveFailBean blogSaveFailBean = this.getBlogSaveFailBean("3",msg.getContent());
+                    boolean i = editerService.insertBlogSaveFail(blogSaveFailBean);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                // 5.0 es运行出错保存信息
+               BlogSaveFailBean blogSaveFailBean = this.getBlogSaveFailBean("4",msg.getContent());
+               boolean i = editerService.insertBlogSaveFail(blogSaveFailBean);
             }
         }else{
             BlogSaveFailBean blogSaveFailBean = this.getBlogSaveFailBean("2",msg.getContent());
             boolean i = editerService.insertBlogSaveFail(blogSaveFailBean);
         }
 
+    }
+
+
+    private BlogEsContentBean convertBlogEsContentBean(BlogContentBean blogContentBean){
+        BlogEsContentBean blogEsContentBean = new BlogEsContentBean();
+
+        blogEsContentBean.setContent(blogContentBean.getContent());
+        blogEsContentBean.setId(blogContentBean.getId());
+        blogEsContentBean.setEndTime(blogContentBean.getEndTime());
+        blogEsContentBean.setNumber(blogContentBean.getNumber());
+        blogEsContentBean.setSort(blogContentBean.getSort());
+        blogEsContentBean.setTitle(blogContentBean.getTitle());
+        blogEsContentBean.setStartTime(blogContentBean.getStartTime());
+        return blogEsContentBean;
     }
 
 

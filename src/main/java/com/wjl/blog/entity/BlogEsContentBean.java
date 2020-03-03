@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@Document(type = "java",indexName = "blogContent")
+@Document(type = "blog_content",indexName = "blog")
 public class BlogEsContentBean implements Serializable {
 
     @Id
