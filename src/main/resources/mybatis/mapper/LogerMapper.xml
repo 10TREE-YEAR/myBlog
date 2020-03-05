@@ -54,7 +54,8 @@
             T1.`T_START` AS start,
             T1.`T_SORT` AS sort,
             T1.`T_DESC` AS menuDesc,
-            T1.`T_TIME` AS menuTime
+            T1.`T_TIME` AS menuTime,
+            T1.`T_MENU_STYLE` AS menuStyle
             FROM
             `jdbc`.`T_MENU` T1
             WHERE T1.`T_START`='1'

@@ -52,39 +52,32 @@ public class LoginController {
      * @return
      */
     @PostMapping(value = "/login.html")
-    public ModelAndView toLogin(@RequestParam(value = "loginUsername") String loginUsername,
+    public String toLogin(@RequestParam(value = "loginUsername") String loginUsername,
                                 @RequestParam(value = "loginPassword") String  loginPassword,
                                 HttpServletRequest request, HttpServletResponse response, HttpSession session){
 
-        // 1.0 获取用户登录信息
-        ModelAndView modelAndView = new ModelAndView();
-        // 1.1 查询是否存在该用户信息
+        // 1.0 查询是否存在该用户信息
         try {
             boolean userInfo = loginService.queryUserInfo(loginUsername,MD5Util.convertMD5(loginPassword));
             if(userInfo){
-                // 1.2 查看session是否存在用户信息
+                // 1.1 查看session是否存在用户信息
                 if(null == session.getAttribute("username")){
-                    // 1.3 将用信息放入session中
+                    // 1.2 将用信息放入session中
                     session.setAttribute("username",loginUsername);
                 }
                 // 1.3 查看redis中是否存在用户信息
                 if(null == redisHelper.getValue(loginUsername)){
                     redisHelper.valuePut(loginUsername,dateTime.get().format(new Date()));
                 }
-                // 1.4 查询一级菜单信息
-                List<BlogMenuBean> blogMenuBeans = loginService.queryBlogMenuBeans();
-
-                modelAndView.addObject("blogMenuBeans",blogMenuBeans);
-                modelAndView.setViewName("/back/pages/index");
+                return "redirect:/welcome.html";
             }else{
                 // 2.0 传入用户信息进行业务处理
-                modelAndView.setViewName("/login");
+                return "redirect:/index.html";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return modelAndView;
+        return "redirect:/index.html";
     }
 
     /**

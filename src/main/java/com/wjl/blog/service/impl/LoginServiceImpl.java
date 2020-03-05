@@ -63,7 +63,7 @@ public class LoginServiceImpl implements LoginService {
     /**
      * 查询是否存在用户信息
      * @param loginUsername
-     * @param convertMD5
+     * @param
      * @return
      */
     @Override

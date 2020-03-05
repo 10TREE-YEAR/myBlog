@@ -1,8 +1,10 @@
 package com.wjl.blog.controller;
 
 import com.wjl.blog.entity.BlogContentBean;
+import com.wjl.blog.entity.BlogMenuBean;
 import com.wjl.blog.entity.ResultInfo;
 import com.wjl.blog.service.EditerService;
+import com.wjl.blog.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -33,6 +35,9 @@ public class EditController {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
+    @Resource(name = "loginServiceImpl")
+    private LoginService loginService;
+
     /**
      * 返回编辑页面
      * @return
@@ -40,8 +45,9 @@ public class EditController {
     @GetMapping(value = "/blogEdit.html")
     public ModelAndView getEditPage(){
         ModelAndView modelAndView = new ModelAndView();
-        // 1.0 校验是否有登录信息
-
+        // 1.0 查询菜单信息
+        List<BlogMenuBean> blogMenuBeans = loginService.queryBlogMenuBeans();
+        modelAndView.addObject("blogMenuBeans",blogMenuBeans);
         // 2.0 返回页面
         modelAndView.setViewName("/back/pages/edit");
         return modelAndView;
