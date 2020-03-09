@@ -20,5 +20,6 @@ public class BlogContentBean implements Serializable {
     private String endTime;// 结束时间
     private String sort;// 排序
     private String number;// 阅读数量
+    private String type;// 博客类型
 
 }

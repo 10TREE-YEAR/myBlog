@@ -3,6 +3,7 @@ package com.wjl.blog.service;
 
 import com.wjl.blog.entity.BlogContentBean;
 import com.wjl.blog.entity.BlogSaveFailBean;
+import com.wjl.blog.entity.BlogTypeBean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface EditerService {
      * 查询博客内容信息
      * @return
      */
-    List<BlogContentBean> queryBlogContentList();
+    List<BlogContentBean> queryBlogContentList(String type);
 
     /**
      * 查询单个博客内容
@@ -55,4 +56,13 @@ public interface EditerService {
     * @Date: 2020/2/17
     */
     boolean insertBlogSaveFail(BlogSaveFailBean blogSaveFailBean);
+
+    /** 
+    * @Description: 查询博客发布类型
+    * @Param: [blogWriteType] 
+    * @return: java.util.List<com.wjl.blog.entity.BlogTypeBean> 
+    * @Author: wangjialu
+    * @Date: 2020/3/9 
+    */ 
+    List<BlogTypeBean> queryBlogTypeList(String blogWriteType);
 }

@@ -10,7 +10,8 @@
         `t_title`,
         `t_blog_content`,
         `t_state`,
-        `t_start_time`
+        `t_start_time`,
+        `t_type`
       )
       VALUES
         (
@@ -18,7 +19,8 @@
           #{blogContentBean.title},
           #{blogContentBean.content},
           #{blogContentBean.state},
-          #{blogContentBean.startTime}
+          #{blogContentBean.startTime},
+          #{blogContentBean.type}
         )
   </insert>
     <select id="queryBlogContentList" resultType="com.wjl.blog.entity.BlogContentBean">
@@ -30,10 +32,12 @@
           `t_start_time` as startTime,
           `t_end_time` as endTime,
           `t_sort` as sort,
-          `t_number` as number
+          `t_number` as number,
+          `t_type` as type
         FROM
           `jdbc`.`T_BOLG_CONTENT`
         WHERE T_STATE = '1'
+        AND T_TYPE=#{type}
     </select>
 
     <select id="queryBlogContent" resultType="com.wjl.blog.entity.BlogContentBean">
@@ -87,4 +91,18 @@
             #{blogSaveFailBean.type}
           )
     </insert>
+
+    <select id="queryBlogTypeList" resultType="com.wjl.blog.entity.BlogTypeBean">
+            SELECT
+              `T_ID` AS id,
+              `T_NAME` AS name,
+              `T_SORT` AS sort,
+              `T_START` AS start,
+              `T_TYPE` AS type,
+              `T_CODE` AS code
+            FROM
+              `jdbc`.`T_BLOG_TYPE`
+            WHERE `T_CODE` = #{blogWriteType}
+            ORDER BY `T_SORT`
+    </select>
 </mapper>

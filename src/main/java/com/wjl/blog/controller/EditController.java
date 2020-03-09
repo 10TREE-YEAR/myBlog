@@ -1,7 +1,9 @@
 package com.wjl.blog.controller;
 
+import com.wjl.blog.constant.BlogTypeContant;
 import com.wjl.blog.entity.BlogContentBean;
 import com.wjl.blog.entity.BlogMenuBean;
+import com.wjl.blog.entity.BlogTypeBean;
 import com.wjl.blog.entity.ResultInfo;
 import com.wjl.blog.service.EditerService;
 import com.wjl.blog.service.LoginService;
@@ -12,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -48,7 +47,10 @@ public class EditController {
         // 1.0 查询菜单信息
         List<BlogMenuBean> blogMenuBeans = loginService.queryBlogMenuBeans();
         modelAndView.addObject("blogMenuBeans",blogMenuBeans);
+        // 1.1 查询博客类型信息
+        List<BlogTypeBean> blogTypeBeans = editerService.queryBlogTypeList(BlogTypeContant.BLOG_WRITE_TYPE);
         // 2.0 返回页面
+        modelAndView.addObject("blogTypeBeans",blogTypeBeans);
         modelAndView.setViewName("/back/pages/edit");
         return modelAndView;
     }
@@ -63,19 +65,10 @@ public class EditController {
     public ResultInfo addTest(BlogContentBean blogContentBean){
         ResultInfo resultInfo = new ResultInfo();
         log.info(blogContentBean.getContent());// 打印博客内容
-
+        // 1.0 生产者传入消息
         this.rabbitTemplate.convertAndSend("blog_exchange", "blog.messages.save", blogContentBean);
-        // 1.0 存入博客信息
+        // 2.0 返回博客信息
         if(!StringUtils.isEmpty(blogContentBean.getContent())){
-//            boolean i =  editerService.insertBlogContert(blogContentBean);
-//            // 2.0 校验是否存入成功
-//            if(i){
-//                resultInfo.setResultMsg("添加成功！");
-//                resultInfo.setResultCode("200");
-//            }else{
-//                resultInfo.setResultMsg("添加失败！");
-//                resultInfo.setResultCode("400");
-//            }
             resultInfo.setResultMsg("添加成功！");
             resultInfo.setResultCode("200");
         }else{
@@ -90,10 +83,13 @@ public class EditController {
      * @return
      */
     @GetMapping(value = "/blogModify.html")
-    public ModelAndView getEditModfiyPage(){
+    public ModelAndView getEditModfiyPage(@RequestParam(value = "type") String type){
         ModelAndView modelAndView = new ModelAndView();
-        // 1.0 查询博客信息
-        List<BlogContentBean> blogContentBeans = editerService.queryBlogContentList();
+        // 1.0 查询菜单信息
+        List<BlogMenuBean> blogMenuBeans = loginService.queryBlogMenuBeans();
+        modelAndView.addObject("blogMenuBeans",blogMenuBeans);
+        // 2.0 查询博客信息
+        List<BlogContentBean> blogContentBeans = editerService.queryBlogContentList(type);
         if(blogContentBeans.size()>0){
             modelAndView.addObject("blogContentBeans",blogContentBeans);
         }
@@ -108,12 +104,16 @@ public class EditController {
      * @return
      */
     @GetMapping(value = "/editBlog.html")
-    public ModelAndView editBlogPage(@RequestParam(value = "id") String id){
+    public ModelAndView editBlogPage(@RequestParam(value = "id") String id, @RequestParam(value = "type") String type){
         ModelAndView andView = new ModelAndView();
-        // 1.0 根据id查询需要修改的博客id内容
+        // 1.0 查询菜单信息
+        List<BlogMenuBean> blogMenuBeans = loginService.queryBlogMenuBeans();
+        andView.addObject("blogMenuBeans",blogMenuBeans);
+        // 2.0 根据id查询需要修改的博客id内容
         BlogContentBean blogContentBean = editerService.queryBlogContent(id);
         // 2.0 返回页面信息
         andView.addObject("blogContentBean",blogContentBean);
+        andView.addObject("blogType",type);
         andView.setViewName("/back/pages/blogEdit");
         return andView;
     }

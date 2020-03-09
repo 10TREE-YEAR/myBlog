@@ -67,10 +67,8 @@
                                 <input type="text" class="form-control" id="blogTitle">
 
                                 <label class="control-label" for="blogTitle"><h3 >类型</h3></label>
-                                <select id="error" class="selectpicker show-tick form-control">
-                                    <option>pen</option>
-                                    <option>pencil</option>
-                                    <option selected="">brush</option>
+                                <select id="blogType" class="selectpicker show-tick form-control">
+                                    <option th:each="blogTypeBean:${blogTypeBeans}" th:text="${blogTypeBean.name}" th:value="${blogTypeBean.type}">pen</option>
                                 </select>
                             </div>
 
@@ -133,6 +131,7 @@
         url = "/addBlog.html";
         var blogTitle = $("#blogTitle").val();// 博客标题
         var blogContent = $("#content").val();// 博客内容
+        var blogType = $("#blogType option:selected").val();// 博客类型
 
         if(null == blogTitle || "" == blogTitle){
             swal({
@@ -145,7 +144,8 @@
 
         var data = {
             "title" : blogTitle,
-            "content" : blogContent
+            "content" : blogContent,
+            "type" : blogType
         };
 
         $.ajax({

@@ -2,6 +2,7 @@ package com.wjl.blog.mapper;
 
 import com.wjl.blog.entity.BlogContentBean;
 import com.wjl.blog.entity.BlogSaveFailBean;
+import com.wjl.blog.entity.BlogTypeBean;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface EditerMapper {
      * 查询博客信息
      * @return
      */
-    List<BlogContentBean> queryBlogContentList();
+    List<BlogContentBean> queryBlogContentList(@Param(value = "type") String type);
 
     /**
      * 查询博客单个内容
@@ -54,4 +55,13 @@ public interface EditerMapper {
     * @Date: 2020/2/17 
     */ 
     boolean insertBlogSaveFail(@Param(value = "blogSaveFailBean") BlogSaveFailBean blogSaveFailBean);
+
+    /** 
+    * @Description: 查询博客发布接口
+    * @Param: [blogWriteType] 
+    * @return: java.util.List<com.wjl.blog.entity.BlogTypeBean> 
+    * @Author: wangjialu
+    * @Date: 2020/3/9 
+    */ 
+    List<BlogTypeBean> queryBlogTypeList(@Param(value = "blogWriteType") String blogWriteType);
 }

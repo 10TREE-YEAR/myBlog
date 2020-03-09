@@ -5,15 +5,15 @@
     /**
      * 修改博客信息
      */
-    mod.editBlog = function(data){
-        window.location.href = "/editBlog.html?id="+data;
+    mod.editBlog = function(id,type){
+        window.location.href = "/editBlog.html?id="+id+"&type="+type;
     };
 
     /**
      * 删除博客信息
      * @param data
      */
-    mod.deleteBlog = function(data){
+    mod.deleteBlog = function(id,type){
         url = "/deleteBlog.html";
         swal({
             title : "Are you sure?",
@@ -28,7 +28,7 @@
            $.ajax({
                type: 'POST',//方法类型
                url: url,
-               data: {id : data},
+               data: {id : id},
                success: function (result){
                    console.info(result);
                    if (result.resultCode == 200) {
@@ -40,7 +40,7 @@
                            icon: "success",
                            button: "确定",
                        }, function () {
-                           window.location.href = "/blogModify.html";
+                           window.location.href = "/blogModify.html?type="+type;
                        });
                    }
                    else {

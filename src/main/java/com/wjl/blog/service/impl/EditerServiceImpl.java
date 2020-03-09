@@ -2,6 +2,7 @@ package com.wjl.blog.service.impl;
 
 import com.wjl.blog.entity.BlogContentBean;
 import com.wjl.blog.entity.BlogSaveFailBean;
+import com.wjl.blog.entity.BlogTypeBean;
 import com.wjl.blog.mapper.EditerMapper;
 import com.wjl.blog.service.EditerService;
 import org.slf4j.Logger;
@@ -51,8 +52,8 @@ public class EditerServiceImpl implements EditerService {
      * @return
      */
     @Override
-    public List<BlogContentBean> queryBlogContentList() {
-        return editerMapper.queryBlogContentList();
+    public List<BlogContentBean> queryBlogContentList(String type) {
+        return editerMapper.queryBlogContentList(type);
     }
 
     /**
@@ -107,5 +108,17 @@ public class EditerServiceImpl implements EditerService {
     @Override
     public boolean insertBlogSaveFail(BlogSaveFailBean blogSaveFailBean) {
         return editerMapper.insertBlogSaveFail(blogSaveFailBean);
+    }
+
+    /** 
+    * @Description: 查询博客发布类型
+    * @Param: [blogWriteType] 
+    * @return: java.util.List<com.wjl.blog.entity.BlogTypeBean> 
+    * @Author: wangjialu
+    * @Date: 2020/3/9 
+    */ 
+    @Override
+    public List<BlogTypeBean> queryBlogTypeList(String blogWriteType) {
+        return editerMapper.queryBlogTypeList(blogWriteType);
     }
 }

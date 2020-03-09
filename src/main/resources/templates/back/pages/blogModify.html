@@ -155,8 +155,8 @@
                             <p th:text="${blogContentBean.content}" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
                         </div>
                         <div class="panel-footer" style="height: 55px">
-                            <button type="button" class="btn btn-primary" id="editBlog" th:onclick="blog.editBlog([[${blogContentBean.id}]])">修改</button>
-                            <button type="button" class="btn btn-danger" id="deleteBlog" th:onclick="blog.deleteBlog([[${blogContentBean.id}]])">删除</button>
+                            <button type="button" class="btn btn-primary" id="editBlog" th:onclick="blog.editBlog([[${blogContentBean.id}]],[[${blogContentBean.type}]])">修改</button>
+                            <button type="button" class="btn btn-danger" id="deleteBlog" th:onclick="blog.deleteBlog([[${blogContentBean.id}]],[[${blogContentBean.type}]])">删除</button>
                         </div>
                     </div>
                     <!-- /.col-lg-4 -->
