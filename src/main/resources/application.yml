@@ -1,10 +1,10 @@
 spring:
-  data:
-    elasticsearch:
-      cluster-name: esDemo
-      cluster-nodes: 192.168.25.131:9300
-      repositories:
-        enabled: true
+#  data:
+#    elasticsearch:
+#      cluster-name: esDemo
+#      cluster-nodes: 192.168.25.131:9300
+#      repositories:
+#        enabled: true
   #此操作会覆盖bean 不要使用
   #main:
     #allow-bean-definition-overriding: true
@@ -60,3 +60,9 @@ logging:
 #启动端口
 server:
   port: 1314
+#es配置类
+elasticSearch:
+  hostlist: 192.168.25.131:9200
+  client:
+    connectNum: 10
+    connectPerRoute: 50

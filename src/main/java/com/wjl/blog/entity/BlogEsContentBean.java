@@ -3,7 +3,7 @@ package com.wjl.blog.entity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
+//import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@Document(type = "blog_content",indexName = "blog")
+//@Document(type = "blog_content",indexName = "blog")
 public class BlogEsContentBean implements Serializable {
 
     @Id
