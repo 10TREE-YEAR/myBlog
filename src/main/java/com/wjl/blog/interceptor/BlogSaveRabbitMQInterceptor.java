@@ -7,6 +7,8 @@ import com.wjl.blog.entity.BlogSaveFailBean;
 import com.wjl.blog.repository.BlogEsSaveRepository;
 import com.wjl.blog.service.EditerService;
 import com.wjl.blog.utils.ElasticsearchUtil;
+import com.wjl.blog.utils.MyElasticSearchUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -25,6 +27,7 @@ import static com.wjl.blog.utils.ConvertBeanUtils.convertBean;
 
 @Component
 @RabbitListener(queues = "blog.messages")
+@Slf4j
 public class BlogSaveRabbitMQInterceptor {
 
     private ThreadLocal<DateFormat> dateTime = new ThreadLocal<DateFormat>(){
@@ -61,11 +64,13 @@ public class BlogSaveRabbitMQInterceptor {
             }
             try {
                 // 4.0 检查es中是否存在该索引
-                if(!ElasticsearchUtil.isIndexExist(ElasticSearchConstant.EsIndexName.BLOG_CONTENT_INDEX_NAME)){
-                    ElasticsearchUtil.createIndex(ElasticSearchConstant.EsIndexName.BLOG_CONTENT_INDEX_NAME,ElasticSearchConstant.EsTypeName.BLOG_CONTENT_TYPE_NAME);
+                if(!MyElasticSearchUtil.isEsIndexNameExist(ElasticSearchConstant.EsIndexName.BLOG_CONTENT_INDEX_NAME)){
+                    MyElasticSearchUtil.createIndex(ElasticSearchConstant.EsIndexName.BLOG_CONTENT_INDEX_NAME,
+                            ElasticSearchConstant.EsTypeName.BLOG_CONTENT_TYPE_NAME,
+                            ElasticSearchConstant.EsSetting.SHARDS_NUM,ElasticSearchConstant.EsSetting.REPLICAS_NUM,
+                            this.getEsDocument());
                 }
-                // 4.1 往索引中添加数据
-                ElasticsearchUtil.addData(creatBuolder(msg),ElasticSearchConstant.EsIndexName.BLOG_CONTENT_INDEX_NAME,ElasticSearchConstant.EsTypeName.BLOG_CONTENT_TYPE_NAME,msg.getId());
+
             } catch (Exception e) {
                 e.printStackTrace();
                 // 5.0 es运行出错保存信息
@@ -89,24 +94,13 @@ public class BlogSaveRabbitMQInterceptor {
         return blogSaveFailBean;
     }
 
-    private XContentBuilder creatBuolder(BlogContentBean blogContentBean){
-        XContentBuilder contentBuilder = null;
-        try {
-            contentBuilder = XContentFactory.jsonBuilder()
-                    .startObject()
-                    .field("id",blogContentBean.getId())
-                    .field("content",blogContentBean.getContent())
-                    .field("title",blogContentBean.getTitle())
-                    .field("startTime",blogContentBean.getStartTime())
-                    .field("endTime",blogContentBean.getEndTime())
-                    .field("state",blogContentBean.getState())
-                    .field("number",blogContentBean.getNumber())
-                    .field("type",blogContentBean.getType())
-                    .endObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return contentBuilder;
+    private Map<String,Map<String, String >> getEsDocument(){
+        Map<String,Map<String, String >> map = new HashMap<>();
+        Map<String,String> map1 = new HashMap<>();
+        map1.put("type","text");
+        map1.put("analyzer","ik_max_word");
+        map.put("name",map1);
+        map.put("age",map1);
+        return map;
     }
-
 }

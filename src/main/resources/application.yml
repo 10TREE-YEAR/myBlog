@@ -19,7 +19,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.25.131:3307/jdbc
+    url: jdbc:mysql://192.168.27.128:3307/jdbc
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     #   数据源其他配置
@@ -42,7 +42,7 @@ spring:
   thymeleaf:
     cache: false
   redis:
-    host: 192.168.25.131
+    host: 192.168.27.128
     port: 6379
   mvc:
     static-path-pattern: /static/**
@@ -62,7 +62,7 @@ server:
   port: 1314
 #es配置类
 elasticSearch:
-  hostlist: 192.168.25.131:9200
+  hostlist: 192.168.27.128:9200
   client:
     connectNum: 10
     connectPerRoute: 50

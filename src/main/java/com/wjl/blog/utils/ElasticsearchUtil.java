@@ -21,6 +21,7 @@ import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.json.JsonXContent;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
@@ -97,59 +98,71 @@ public class ElasticsearchUtil<T> {
      * @return: boolean
      * @auther: LHL
      */
-    public static boolean createIndex(String indexName,String typeName) {
+    public static boolean createIndex(String indexName) {
         if (!isIndexExist(indexName)) {
             log.info("Index is not exits!");
         }
-
-        CreateIndexResponse indexResponse = null;
+        CreateIndexResponse createIndexResponse = null;
         try {
             //创建映射
             XContentBuilder mapping = null;
-            //索引json格式  例子
-            Map<String,Map<String,String>> properties = new HashMap<String,Map<String,String>>();
-
-            Map<String,String> propertie = new HashMap<String,String>();
-            propertie.put("type","date");
-            properties.put("date", propertie);
-
-            Map<String,String> propertie2 = new HashMap<String,String>();
-            propertie2.put("type","intager");
-            properties.put("age",propertie2);
-
-            Map<String,String> propertie3 = new HashMap<String,String>();
-            propertie3.put("type","test");
-            //指定ik分词器
-            propertie3.put("analyzer","ik_max_word");
-            properties.put("name",propertie3);
-            properties.put("address",propertie3);
-
             try {
-                mapping = JsonXContent.contentBuilder();
-                mapping.startObject()
-                        .startObject("mappings")
-                        .startObject(typeName)
-                        .field("properties",properties)
+                mapping = XContentFactory.jsonBuilder()
+                        .startObject()
+                        .startObject("properties")
+                        //.startObject("m_id").field("type","keyword").endObject()  //m_id:字段名,type:文本类型,analyzer 分词器类型
+                        //该字段添加的内容，查询时将会使用ik_max_word 分词 //ik_smart  ik_max_word  standard
+                        .startObject("id")
+                        .field("type", "text")
+                        .endObject()
+                        .startObject("pdfId")
+                        .field("type", "text")
+                        .endObject()
+                        .startObject("title")
+                        .field("type", "text")
+                        .field("analyzer", "ik_max_word")
+                        .endObject()
+                        .startObject("author")
+                        .field("type", "text")
+                        .field("analyzer", "ik_max_word")
+                        .endObject()
+                        .startObject("content")
+                        .field("type", "text")
+                        .field("analyzer", "ik_max_word")
+                        .endObject()
+                        .startObject("columnName")
+                        .field("type", "text")
+                        .field("analyzer", "ik_max_word")
+                        .endObject()
+                        .startObject("articlesSource")
+                        .field("type", "text")
+                        .field("analyzer", "ik_max_word")
+                        .endObject()
+                        .startObject("periodicalDate")
+                        .field("type", "text")
+                        .field("analyzer", "ik_max_word")
                         .endObject()
                         .endObject()
                         .startObject("settings")
-                        .field("number_of_shards",3)
-                        .field("number_of_replicas",1)
+                        //分片数
+                        .field("number_of_shards", 3)
+                        //副本数
+                        .field("number_of_replicas", 1)
                         .endObject()
                         .endObject();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            CreateIndexRequest request = new CreateIndexRequest(indexName)
-                    .source(mapping);
+            CreateIndexRequest request = new CreateIndexRequest(indexName).source(mapping);
             //设置创建索引超时2分钟
             request.setTimeout(TimeValue.timeValueMinutes(2));
-            indexResponse = client.indices().create(request, RequestOptions.DEFAULT);
+            createIndexResponse = client.indices().create(request, RequestOptions.DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return indexResponse.isAcknowledged();
+        return createIndexResponse.isAcknowledged();
     }
+
 
     /**
      * 数据添加
