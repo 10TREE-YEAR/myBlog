@@ -1,6 +1,7 @@
 package com.wjl.blog.controller;
 
 import com.wjl.blog.constant.BlogTypeContant;
+import com.wjl.blog.constant.RabbitMQConstant;
 import com.wjl.blog.entity.BlogContentBean;
 import com.wjl.blog.entity.BlogMenuBean;
 import com.wjl.blog.entity.BlogTypeBean;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 博客编辑控制层
@@ -66,7 +68,7 @@ public class EditController {
         ResultInfo resultInfo = new ResultInfo();
         log.info(blogContentBean.getContent());// 打印博客内容
         // 1.0 生产者传入消息
-        this.rabbitTemplate.convertAndSend("blog_exchange", "blog.messages.save", blogContentBean);
+        this.rabbitTemplate.convertAndSend(RabbitMQConstant.BLOG_EXCHANGE, RabbitMQConstant.RabbitMQRoutKey.BLOG_SAVE_ROUT_KEY, blogContentBean);
         // 2.0 返回博客信息
         if(!StringUtils.isEmpty(blogContentBean.getContent())){
             resultInfo.setResultMsg("添加成功！");
@@ -89,7 +91,7 @@ public class EditController {
         List<BlogMenuBean> blogMenuBeans = loginService.queryBlogMenuBeans();
         modelAndView.addObject("blogMenuBeans",blogMenuBeans);
         // 2.0 查询博客信息
-        List<BlogContentBean> blogContentBeans = editerService.queryBlogContentList(type);
+        List<Map<String, Object>> blogContentBeans = editerService.queryBlogContentList(type);
         if(blogContentBeans.size()>0){
             modelAndView.addObject("blogContentBeans",blogContentBeans);
         }

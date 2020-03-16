@@ -1,19 +1,27 @@
 package com.wjl.blog.service.impl;
 
+import com.wjl.blog.constant.ElasticSearchConstant;
 import com.wjl.blog.entity.BlogContentBean;
 import com.wjl.blog.entity.BlogSaveFailBean;
 import com.wjl.blog.entity.BlogTypeBean;
+import com.wjl.blog.entity.EsPage;
 import com.wjl.blog.mapper.EditerMapper;
 import com.wjl.blog.service.EditerService;
+import com.wjl.blog.utils.MyElasticSearchUtil;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -52,8 +60,12 @@ public class EditerServiceImpl implements EditerService {
      * @return
      */
     @Override
-    public List<BlogContentBean> queryBlogContentList(String type) {
-        return editerMapper.queryBlogContentList(type);
+    public List<Map<String, Object>> queryBlogContentList(String type) {
+        // 使用es查询博客信息
+        EsPage esPage = MyElasticSearchUtil.searchDataPage(ElasticSearchConstant.EsIndexName.BLOG_CONTENT_INDEX_NAME,
+                1,10,new TermQueryBuilder("type",type),"","sort",
+                "asc","");
+        return esPage.getRecordList();
     }
 
     /**
@@ -76,7 +88,19 @@ public class EditerServiceImpl implements EditerService {
         blogContentBean.setEndTime(dateTime.get().format(new Date()));
         int i = editerMapper.updateBlogContent(blogContentBean);
         if(i>0){
-            return true;
+            // 修改es博客信息
+            try {
+                String id = MyElasticSearchUtil.updateData(this.createBuilder(blogContentBean),ElasticSearchConstant.EsIndexName.BLOG_CONTENT_INDEX_NAME,
+                        ElasticSearchConstant.EsTypeName.BLOG_CONTENT_TYPE_NAME,blogContentBean.getId());
+                if(id.equals(blogContentBean.getId())){
+                    return true;
+                }else{
+                    return false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
         }else{
             return false;
         }
@@ -92,7 +116,14 @@ public class EditerServiceImpl implements EditerService {
         String time = dateTime.get().format(new Date());
         int i =editerMapper.deleteBlogInfo(id, time);
         if(i>0){
-            return true;
+            try {
+                MyElasticSearchUtil.deleteData(ElasticSearchConstant.EsIndexName.BLOG_CONTENT_INDEX_NAME,
+                        ElasticSearchConstant.EsTypeName.BLOG_CONTENT_TYPE_NAME,id);
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
         }else{
             return false;
         }
@@ -120,5 +151,19 @@ public class EditerServiceImpl implements EditerService {
     @Override
     public List<BlogTypeBean> queryBlogTypeList(String blogWriteType) {
         return editerMapper.queryBlogTypeList(blogWriteType);
+    }
+    private XContentBuilder createBuilder(BlogContentBean blogContentBean){
+        XContentBuilder xContentBuilder = null;
+        try {
+            xContentBuilder = XContentFactory.jsonBuilder()
+                    .startObject()
+                    .field("title",blogContentBean.getTitle())
+                    .field("content",blogContentBean.getContent())
+                    .field("endTime",blogContentBean.getEndTime())
+                    .endObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return xContentBuilder;
     }
 }

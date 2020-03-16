@@ -1,5 +1,6 @@
 package com.wjl.blog.config;
 
+import com.wjl.blog.constant.RabbitMQConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -47,14 +48,14 @@ public class RabbitMQConfig {
 
     @Bean(name="messages")
     public Queue queueMessages() {
-        return new Queue("blog.messages");
+        return new Queue(RabbitMQConstant.BLOG_QUEUE);
     }
     //===============以上是验证topic Exchange的队列==========
 
     @Bean
     TopicExchange exchange() {
         // 参数1为交换机的名称
-        return new TopicExchange("blog_exchange");
+        return new TopicExchange(RabbitMQConstant.BLOG_EXCHANGE);
     }
 
 //    @Bean

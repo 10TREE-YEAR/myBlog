@@ -4,9 +4,9 @@ package com.wjl.blog.service;
 import com.wjl.blog.entity.BlogContentBean;
 import com.wjl.blog.entity.BlogSaveFailBean;
 import com.wjl.blog.entity.BlogTypeBean;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *博客业务处理接口
@@ -24,7 +24,7 @@ public interface EditerService {
      * 查询博客内容信息
      * @return
      */
-    List<BlogContentBean> queryBlogContentList(String type);
+    List<Map<String, Object>> queryBlogContentList(String type);
 
     /**
      * 查询单个博客内容
