@@ -130,8 +130,9 @@ public class EditController {
         ResultInfo resultInfo = new ResultInfo();
         try {
             // 1.0 修改博客信息
-            boolean i = editerService.updateBlogContent(blogContentBean);
-            if(i){
+            this.rabbitTemplate.convertAndSend(RabbitMQConstant.BLOG_EXCHANGE, RabbitMQConstant.RabbitMQRoutKey.BLOG_EDIT_ROUT_KEY, blogContentBean);
+            //boolean i = editerService.updateBlogContent(blogContentBean);
+            if(!StringUtils.isEmpty(blogContentBean.getContent())){
                 resultInfo.setResultMsg("修改成功");
                 resultInfo.setResultCode("200");
             }else{

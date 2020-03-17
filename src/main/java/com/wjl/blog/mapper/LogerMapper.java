@@ -4,6 +4,7 @@ import com.wjl.blog.entity.BlogMenuBean;
 import com.wjl.blog.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -38,5 +39,6 @@ public interface LogerMapper {
      * 查询所有的一级菜单
      * @return
      */
+    @Cacheable(value = "memu" ,key = "T(com.wjl.blog.constant.BlogRedisKeyConstant).BLOG_MENU_KEY")
     List<BlogMenuBean> queryBlogMenuBeans();
 }

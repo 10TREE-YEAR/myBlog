@@ -40,15 +40,20 @@ public class RabbitMQConfig {
      */
 
     //===============以下是验证topic Exchange的队列==========
-    // Bean默认的name是方法名
-//    @Bean(name="message")
-//    public Queue queueMessage() {
-//        return new Queue("topic.message");
-//    }
+    //     Bean默认的name是方法名
+    //    @Bean(name="message")
+    //    public Queue queueMessage() {
+    //        return new Queue("topic.message");
+    //    }
 
     @Bean(name="messages")
     public Queue queueMessages() {
         return new Queue(RabbitMQConstant.BLOG_QUEUE);
+    }
+
+    @Bean(name = "eidtQueue")
+    public Queue setBlogEdit(){
+        return new Queue(RabbitMQConstant.BLOG_EDIT_QUEUE);
     }
     //===============以上是验证topic Exchange的队列==========
 
@@ -58,11 +63,11 @@ public class RabbitMQConfig {
         return new TopicExchange(RabbitMQConstant.BLOG_EXCHANGE);
     }
 
-//    @Bean
-//    // 如果参数名和上面用到方法名称一样，可以不用写@Qualifier
-//    Binding bindingExchangeMessage(@Qualifier("message")Queue queueMessage, TopicExchange exchange) {
-//        return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
-//    }
+    //    @Bean
+    //    // 如果参数名和上面用到方法名称一样，可以不用写@Qualifier
+    //    Binding bindingExchangeMessage(@Qualifier("message")Queue queueMessage, TopicExchange exchange) {
+    //        return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
+    //    }
 
     /**
      * 将队列topic.messages与exchange绑定，routing_key为topic.#,模糊匹配
@@ -71,8 +76,12 @@ public class RabbitMQConfig {
      * @return
      */
     @Bean
-    Binding bindingExchangeMessages(@Qualifier("messages")Queue queueMessages, TopicExchange exchange) {
+    Binding bindingBlogSaveMessages(@Qualifier("messages")Queue queueMessages, TopicExchange exchange) {
         return BindingBuilder.bind(queueMessages).to(exchange).with("blog.#.save");
+    }
+    @Bean
+    Binding bindingBlogEditMessages(@Qualifier("eidtQueue")Queue queueMessages, TopicExchange exchange) {
+        return BindingBuilder.bind(queueMessages).to(exchange).with("blog.#.edit");
     }
 
     @Bean

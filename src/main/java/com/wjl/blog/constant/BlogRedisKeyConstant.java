@@ -12,4 +12,7 @@ public class BlogRedisKeyConstant {
     public static final String BLOG_INDEX_KEY = "BLOG_INDEX_KEY";
     // 单个博客存入的标识
     public static final String BLOG_ONE_INDEX_KEY = "BLOG_ONE_INDEX_KEY";
+
+    // 博客菜单存入标识
+    public static final String BLOG_MENU_KEY = "blog_menu_key";
 }
