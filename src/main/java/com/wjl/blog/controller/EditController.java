@@ -8,11 +8,11 @@ import com.wjl.blog.entity.BlogTypeBean;
 import com.wjl.blog.entity.ResultInfo;
 import com.wjl.blog.service.EditerService;
 import com.wjl.blog.service.LoginService;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +25,7 @@ import java.util.Map;
 /**
  * 博客编辑控制层
  */
+@Api(tags = "博客编辑控制层")
 @Controller
 public class EditController {
 
@@ -43,6 +44,7 @@ public class EditController {
      * 返回编辑页面
      * @return
      */
+    @ApiOperation(value = "返回编辑页面",notes = "需要查询菜单信息")
     @GetMapping(value = "/blogEdit.html")
     public ModelAndView getEditPage(){
         ModelAndView modelAndView = new ModelAndView();
@@ -62,9 +64,12 @@ public class EditController {
      * @param blogContentBean
      * @return
      */
+    @ApiOperation(value = "获取返回信息")
+    @ApiImplicitParam(name = "blogContentBean",value = "博客内容返回信息",required = true,dataType = "com.wjl.blog.entity.BlogContentBean")
+    @ApiResponses({@ApiResponse(code = 200,message = "添加成功"), @ApiResponse(code = 400,message = "没有博客内容")})
     @PostMapping(value = "/addBlog.html")
     @ResponseBody
-    public ResultInfo addTest(BlogContentBean blogContentBean){
+    public ResultInfo addBlogContent(BlogContentBean blogContentBean){
         ResultInfo resultInfo = new ResultInfo();
         log.info(blogContentBean.getContent());// 打印博客内容
         // 1.0 生产者传入消息
