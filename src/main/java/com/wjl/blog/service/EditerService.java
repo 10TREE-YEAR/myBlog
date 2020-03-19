@@ -24,7 +24,7 @@ public interface EditerService {
      * 查询博客内容信息
      * @return
      */
-    List<Map<String, Object>> queryBlogContentList(String type);
+    List<Map<String, Object>> queryBlogContentList(int currentPage,int pageSize,String type);
 
     /**
      * 查询单个博客内容

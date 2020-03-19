@@ -2,10 +2,7 @@ package com.wjl.blog.controller;
 
 import com.wjl.blog.constant.BlogTypeContant;
 import com.wjl.blog.constant.RabbitMQConstant;
-import com.wjl.blog.entity.BlogContentBean;
-import com.wjl.blog.entity.BlogMenuBean;
-import com.wjl.blog.entity.BlogTypeBean;
-import com.wjl.blog.entity.ResultInfo;
+import com.wjl.blog.entity.*;
 import com.wjl.blog.service.EditerService;
 import com.wjl.blog.service.LoginService;
 import io.swagger.annotations.*;
@@ -95,12 +92,8 @@ public class EditController {
         // 1.0 查询菜单信息
         List<BlogMenuBean> blogMenuBeans = loginService.queryBlogMenuBeans();
         modelAndView.addObject("blogMenuBeans",blogMenuBeans);
-        // 2.0 查询博客信息
-        List<Map<String, Object>> blogContentBeans = editerService.queryBlogContentList(type);
-        if(blogContentBeans.size()>0){
-            modelAndView.addObject("blogContentBeans",blogContentBeans);
-        }
         // 2.0 返回页面
+        modelAndView.addObject("type",type);
         modelAndView.setViewName("/back/pages/blogModify");
         return modelAndView;
     }
@@ -172,5 +165,34 @@ public class EditController {
             resultInfo.setResultCode("400");
         }
         return resultInfo;
+    }
+
+    /**
+     * @Description: 博客编辑页面返回值
+     * @param @param
+     * @return @return
+     * @author wangjialu
+     * @throws
+     * @date 2020/3/19 20:20
+     *
+     */
+    @ApiOperation(value = "编辑分页查询")
+    @ApiImplicitParam(name = "page",value = "当前页数",required = true, dataType = "String")
+    @ApiImplicitParams({@ApiImplicitParam(name = "page",value = "当前页数",required = true,dataType = "String")
+            ,@ApiImplicitParam(name = "type",value = "页面类型",required = true)})
+    @GetMapping(value = "/getBlogModify.html")
+    @ResponseBody
+    public EsPage getBlogModify(@RequestParam(value = "page") String pageNum, @RequestParam(value = "size") String size,
+                                  @RequestParam(value = "type") String type){
+        // 1.0 封装菜单信息
+        int ps = size != null ? Integer.parseInt(size) : 10;
+        int pn = pageNum != null ? Integer.parseInt(pageNum) : 1;
+        EsPage esPage = null;
+        // 2.0 查询菜单信息
+        List<Map<String, Object>> blogContentBeans = editerService.queryBlogContentList(pn,ps,type);
+        if(blogContentBeans.size()>0){
+            esPage = new EsPage(pn,ps,blogContentBeans.size(),blogContentBeans);
+        }
+        return esPage;
     }
 }

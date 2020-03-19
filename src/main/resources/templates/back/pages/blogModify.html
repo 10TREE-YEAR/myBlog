@@ -23,7 +23,6 @@
 
     <!-- Morris Charts CSS -->
     <link href="../css/morris.css" rel="stylesheet" th:href="@{/static/back/css/morris.css}">
-    <link href="../css/morris.css" rel="stylesheet" th:href="@{/static/back/css/pagination.css}">
     <!-- Custom Fonts -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" th:href="@{/static/back/css/font-awesome.min.css}">
 
@@ -58,36 +57,26 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">博 客 内 容</h1>
+                    <input type="hidden" th:value="${type}" id="typeName">
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
 
-            <div class="row">
-                <div class="col-lg-4" th:each="blogContentBean : ${blogContentBeans}">
-                    <div class="panel panel-green" th:class="'panel panel-green'">
-                        <div class="panel-heading" th:text="${blogContentBean.title}" style="height: 40px">
-                            Green Panel
-                        </div>
-                        <div class="panel-body" style="height: 100px;">
-                            <p th:text="${blogContentBean.content}" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                        </div>
-                        <div class="panel-footer" style="height: 55px">
-                            <button type="button" class="btn btn-primary" id="editBlog" th:onclick="blog.editBlog([[${blogContentBean.id}]],[[${blogContentBean.type}]])">修改</button>
-                            <button type="button" class="btn btn-danger" id="deleteBlog" th:onclick="blog.deleteBlog([[${blogContentBean.id}]],[[${blogContentBean.type}]])">删除</button>
-                        </div>
-                    </div>
-                    <!-- /.col-lg-4 -->
-                </div>
+            <div class="row" id="blogContent">
             </div>
         </div>
-        <!-- /.container-fluid -->
-    </div>
-    <!-- /#page-wrapper -->
-</div>
-<!-- /#wrapper -->
+        <!-- 分页容器：显示数据 -->
+        <div id="htmlDiv"></div>
+        <!-- 分页容器： 显示分页按钮-->
+        <div class="col-lg-12" align="center">
+            <!-- 注意:3版本的分页容器标签是<ul>，2版本的容器标签是<div> -->
+            <ul id="mypage"></ul>
+        </div>
 
-<!-- jQuery -->
-<script src="../js/jquery.min.js" th:src="@{/static/back/js/jquery.min.js}"></script>
+    </div>
+</div>
+
+<script src="../js/jquery.min.js" th:src="@{/static/back/js/jquery-2.1.4.min.js}"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="../js/bootstrap.min.js" th:src="@{/static/back/js/bootstrap.min.js}"></script>
@@ -97,9 +86,6 @@
 
 <!-- Morris Charts JavaScript -->
 <script src="../js/raphael.min.js" th:src="@{/static/back/js/raphael.min.js}"></script>
-<!--<script src="../js/morris.min.js" th:src="@{/static/back/js/morris.min.js}"></script>-->
-<!--<script src="../js/morris-data.js" th:src="@{/static/back/js/morris-data.js}"></script>-->
-
 <!-- Custom Theme JavaScript -->
 <script src="../js/startmin.js" th:src="@{/static/back/js/startmin.js}"></script>
 <script src="js/editormd.min.js" th:src="@{/static/back/edit/js/editormd.min.js}"></script>
@@ -113,7 +99,77 @@
 <script src="lib/jquery.flowchart.min.js" th:src="@{/static/back/edit/lib/jquery.flowchart.min.js}"></script>
 
 <script src="js/editormd.js" th:src="@{/static/back/edit/js/editormd.js}"></script>
+<script src="js/editormd.js" th:src="@{/static/back/js/bootstrap-paginator.js}"></script>
 <script src="js/editormd.js" th:src="@{/static/back/js/blog/blog.js}"></script>
-<script src="js/editormd.js" th:src="@{/static/back/js/jquery.pagination.js}"></script>
+<script type="text/javascript">
+    var typeName = $("#typeName").val();
+    $(function() {
+        pageStart();//开始分页
+        function pageStart() {//分页函数
+            $.ajax({ //去后台查询第一页数据
+                type : "get",
+                url : "/getBlogModify.html",
+                dataType : "json",
+                data : {page : '1',type : typeName, size : '10'}, //参数：当前页为1
+                success : function(data) {
+                    appendHtml(data.recordList)//处理第一页的数据
+                    var options = {//根据后台返回的分页相关信息，设置插件参数
+                        bootstrapMajorVersion : 3, //如果是bootstrap3版本需要加此标识，并且设置包含分页内容的DOM元素为UL,如果是bootstrap2版本，则DOM包含元素是DIV
+                        currentPage : data.currentPage, //当前页数
+                        totalPages : data.pageCount, //总页数
+                        numberOfPages : data.recordCount,//每页记录数
+                        itemTexts : function(type, page, current) {//设置分页按钮显示字体样式
+                            switch (type) {
+                                case "first":
+                                    return "首页";
+                                case "prev":
+                                    return "上一页";
+                                case "next":
+                                    return "下一页";
+                                case "last":
+                                    return "末页";
+                                case "page":
+                                    return page;
+                            }
+                        },
+                        onPageClicked : function(event, originalEvent, type, page) {//分页按钮点击事件
+                            $.ajax({//根据page去后台加载数据
+                                url : "/getBlogModify.html",
+                                type : "get",
+                                dataType : "json",
+                                data : {"page" : page, type : typeName, size : '10'},
+                                success : function(data) {
+                                    appendHtml(data.recordList);//处理数据
+                                }
+                            });
+                        }
+                    };
+                    $('#mypage').bootstrapPaginator(options);//设置分页
+                }
+            });
+        }
+
+        function appendHtml(list) {//此函数用于处理后台返回的数据，根据自己需求来实现页面拼接
+            var tableShow = '';
+            for (var i = 0; i < list.length; i++) {
+                tableShow += ' <div class="col-lg-4">';
+                tableShow += ' <div class="panel panel-green">';
+                tableShow += ' <div class="panel-heading"  style="height: 40px">'+list[i].title+'</div>';
+                tableShow += ' <div class="panel-body" style="height: 100px;">';
+                tableShow += ' <div class="am-u-sm-4 am-list-thumb">';
+                tableShow += ' <p >'+list[i].content+'</p>';
+                tableShow += ' </div>';
+                tableShow += ' <div>';
+                tableShow += ' <button type="button" class="btn btn-primary" id="editBlog" onclick="blog.editBlog(\''+list[i].id+'\',\''+list[i].type+'\')">修改</button>';
+                tableShow += ' <button type="button" class="btn btn-danger" id="deleteBlog" onclick="blog.deleteBlog(\''+list[i].id+'\',\''+list[i].type+'\')">删除</button>';
+                tableShow += ' </div>';
+                tableShow += ' </div>';
+                tableShow += ' </div>';
+                tableShow += ' </div>';
+            }
+            $('#blogContent').html(tableShow)
+        }
+    });
+</script>
 </body>
 </html>
