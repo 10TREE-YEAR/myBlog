@@ -110,7 +110,7 @@
                 type : "get",
                 url : "/getBlogModify.html",
                 dataType : "json",
-                data : {page : '1',type : typeName, size : '10'}, //参数：当前页为1
+                data : {page : '1',type : typeName, size : '9'}, //参数：当前页为1
                 success : function(data) {
                     appendHtml(data.recordList)//处理第一页的数据
                     var options = {//根据后台返回的分页相关信息，设置插件参数
@@ -137,7 +137,7 @@
                                 url : "/getBlogModify.html",
                                 type : "get",
                                 dataType : "json",
-                                data : {"page" : page, type : typeName, size : '10'},
+                                data : {"page" : page, type : typeName, size : '9'},
                                 success : function(data) {
                                     appendHtml(data.recordList);//处理数据
                                 }

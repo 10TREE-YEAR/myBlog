@@ -189,10 +189,6 @@ public class EditController {
         int pn = pageNum != null ? Integer.parseInt(pageNum) : 1;
         EsPage esPage = null;
         // 2.0 查询菜单信息
-        List<Map<String, Object>> blogContentBeans = editerService.queryBlogContentList(pn,ps,type);
-        if(blogContentBeans.size()>0){
-            esPage = new EsPage(pn,ps,blogContentBeans.size(),blogContentBeans);
-        }
-        return esPage;
+        return editerService.queryBlogContentList(pn,ps,type);
     }
 }

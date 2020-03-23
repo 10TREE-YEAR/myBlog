@@ -4,6 +4,7 @@ package com.wjl.blog.service;
 import com.wjl.blog.entity.BlogContentBean;
 import com.wjl.blog.entity.BlogSaveFailBean;
 import com.wjl.blog.entity.BlogTypeBean;
+import com.wjl.blog.entity.EsPage;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public interface EditerService {
      * 查询博客内容信息
      * @return
      */
-    List<Map<String, Object>> queryBlogContentList(int currentPage,int pageSize,String type);
+    EsPage queryBlogContentList(int currentPage, int pageSize, String type);
 
     /**
      * 查询单个博客内容

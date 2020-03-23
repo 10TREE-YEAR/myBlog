@@ -60,12 +60,12 @@ public class EditerServiceImpl implements EditerService {
      * @return
      */
     @Override
-    public List<Map<String, Object>> queryBlogContentList(int currentPage,int pageSize,String type) {
+    public EsPage queryBlogContentList(int currentPage,int pageSize,String type) {
         // 使用es查询博客信息
         EsPage esPage = MyElasticSearchUtil.searchDataPage(ElasticSearchConstant.EsIndexName.BLOG_CONTENT_INDEX_NAME,
                 currentPage,pageSize,new TermQueryBuilder("type",type),"","sort",
                 "asc","");
-        return esPage.getRecordList();
+        return esPage;
     }
 
     /**
