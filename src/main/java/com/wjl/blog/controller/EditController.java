@@ -68,7 +68,7 @@ public class EditController {
     @ResponseBody
     public ResultInfo addBlogContent(BlogContentBean blogContentBean){
         ResultInfo resultInfo = new ResultInfo();
-        log.info(blogContentBean.getContent());// 打印博客内容
+        //log.info(blogContentBean.getContent());// 打印博客内容
         // 1.0 生产者传入消息
         this.rabbitTemplate.convertAndSend(RabbitMQConstant.BLOG_EXCHANGE, RabbitMQConstant.RabbitMQRoutKey.BLOG_SAVE_ROUT_KEY, blogContentBean);
         // 2.0 返回博客信息
@@ -146,10 +146,16 @@ public class EditController {
     }
 
     /**
-     * 删除博客信息
-     * @param id
-     * @return
+     * @Description: 删除博客信息
+     * @param @param
+     * @return @return
+     * @author wangjialu
+     * @throws
+     * @date 2020/3/23 15:05
      */
+    @ApiOperation(value = "删除博客信息")
+    @ApiImplicitParam(name = "id",value= "id",required = true, dataType = "java.lang.String")
+    @ApiResponse(code = 200, message = "返回信息", response = ResultInfo.class)
     @PostMapping(value = "/deleteBlog.html")
     @ResponseBody
     public ResultInfo deleteBlogInfo(@RequestParam(value = "id") String id){
@@ -184,10 +190,9 @@ public class EditController {
     @ResponseBody
     public EsPage getBlogModify(@RequestParam(value = "page") String pageNum, @RequestParam(value = "size") String size,
                                   @RequestParam(value = "type") String type){
-        // 1.0 封装菜单信息
+        // 1.0 设置页码和分页数
         int ps = size != null ? Integer.parseInt(size) : 10;
         int pn = pageNum != null ? Integer.parseInt(pageNum) : 1;
-        EsPage esPage = null;
         // 2.0 查询菜单信息
         return editerService.queryBlogContentList(pn,ps,type);
     }

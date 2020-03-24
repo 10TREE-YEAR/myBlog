@@ -3,17 +3,23 @@ package com.wjl.blog.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wjl.blog.constant.BlogRedisKeyConstant;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 import java.lang.reflect.Method;
+import java.time.Duration;
+
+import static java.util.Collections.singletonMap;
 
 public class RedisConfiguration extends CachingConfigurerSupport {
 
@@ -47,8 +53,18 @@ public class RedisConfiguration extends CachingConfigurerSupport {
      */
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
+
         RedisCacheManager redisCacheManager = RedisCacheManager.create(connectionFactory);
-        return  redisCacheManager;
+        /* 默认配置， 默认超时时间为30s */
+        RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration
+                .ofSeconds(30L)).disableCachingNullValues();
+
+        /* 配置菜单的超时时间为120s*/
+        RedisCacheManager cacheManager = RedisCacheManager.builder(RedisCacheWriter.lockingRedisCacheWriter
+                (connectionFactory)).cacheDefaults(defaultCacheConfig).withInitialCacheConfigurations(singletonMap
+                ("memu", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(120L))
+                        .disableCachingNullValues())).transactionAware().build();
+        return  cacheManager;
     }
 
     @Bean
