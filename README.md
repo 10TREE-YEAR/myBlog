@@ -2,7 +2,7 @@
 
 * 博客分为前台和后台，后台完成编写、展示和修改功能，前台目前完成展示功能
 * 项目使用SpringBoot搭建，使用redis、es、rabbitmq、mysql来处理博客内容，博客编写工具使用markdown内嵌工具
-* 在Linxu系统创建docker用来管理redis、es、mysql,使用虚拟机创建Linux建议分配内存在4G以上
+* 在Linux系统创建docker用来管理redis、es、mysql,使用虚拟机创建Linux建议分配内存在4G以上
 
 # 版本
 * SpringBoot 2.1.8
